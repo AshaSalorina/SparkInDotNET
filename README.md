@@ -13,4 +13,4 @@ C# .NET Core 2.1 or higher
 
 ----
 
-本项目地址：<https://github.com/AshaSalorina/SparkForDotNET>
+本项目地址：<https://github.com/AshaSalorina/SparkInDotNET>
