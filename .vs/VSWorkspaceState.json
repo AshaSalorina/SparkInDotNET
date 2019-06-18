@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CoreSite",
+    "\\CoreSite\\Controllers"
   ],
+  "SelectedNode": "\\CoreSite\\Startup.cs",
   "PreviewInSolutionExplorer": false
 }

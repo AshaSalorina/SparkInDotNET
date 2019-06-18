@@ -2,6 +2,21 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.1": {
+      "Apache.Arrow/0.13.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Buffers": "4.5.0",
+          "System.Memory": "4.5.2",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.2",
+          "System.Threading.Tasks.Extensions": "4.5.2"
+        },
+        "compile": {
+          "lib/netcoreapp2.1/Apache.Arrow.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/Apache.Arrow.dll": {}
+        }
+      },
       "Microsoft.AspNet.WebApi.Client/5.2.6": {
         "type": "package",
         "dependencies": {
@@ -2578,6 +2593,25 @@
           "lib/netstandard1.0/_._": {}
         }
       },
+      "Microsoft.Spark/0.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Apache.Arrow": "0.13.0",
+          "Microsoft.CSharp": "4.5.0",
+          "Newtonsoft.Json": "11.0.2",
+          "Razorvine.Pyrolite": "4.26.0",
+          "System.Memory": "4.5.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Spark.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Spark.dll": {}
+        },
+        "build": {
+          "build/netstandard2.0/Microsoft.Spark.targets": {}
+        }
+      },
       "Microsoft.Win32.Registry/4.5.0": {
         "type": "package",
         "dependencies": {
@@ -2636,6 +2670,28 @@
         },
         "runtime": {
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
+        }
+      },
+      "Razorvine.Pyrolite/4.26.0": {
+        "type": "package",
+        "dependencies": {
+          "Razorvine.Serpent": "1.29.0",
+          "System.Memory": "4.5.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/Razorvine.Pyrolite.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Razorvine.Pyrolite.dll": {}
+        }
+      },
+      "Razorvine.Serpent/1.29.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Razorvine.Serpent.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Razorvine.Serpent.dll": {}
         }
       },
       "Remotion.Linq/2.2.0": {
@@ -3350,7 +3406,7 @@
           "lib/netstandard1.3/System.Linq.Queryable.dll": {}
         }
       },
-      "System.Memory/4.5.1": {
+      "System.Memory/4.5.2": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.1/_._": {}
@@ -3611,7 +3667,7 @@
           "ref/netstandard1.5/System.Runtime.dll": {}
         }
       },
-      "System.Runtime.CompilerServices.Unsafe/4.5.1": {
+      "System.Runtime.CompilerServices.Unsafe/4.5.2": {
         "type": "package",
         "compile": {
           "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
@@ -4142,7 +4198,7 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "System.Threading.Tasks.Extensions/4.5.1": {
+      "System.Threading.Tasks.Extensions/4.5.2": {
         "type": "package",
         "compile": {
           "ref/netcoreapp2.1/_._": {}
@@ -4337,6 +4393,20 @@
     }
   },
   "libraries": {
+    "Apache.Arrow/0.13.0": {
+      "sha512": "Ya6s41CxzBOQjr1a/DLshMsX/FjJLsN0stBJtxRy785eEISRdKl02Vv4ZxgDEiujDACKHKxK8hOG0LP055jLHg==",
+      "type": "package",
+      "path": "apache.arrow/0.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.txt",
+        "apache.arrow.0.13.0.nupkg.sha512",
+        "apache.arrow.nuspec",
+        "lib/netcoreapp2.1/Apache.Arrow.dll",
+        "lib/netstandard1.3/Apache.Arrow.dll"
+      ]
+    },
     "Microsoft.AspNet.WebApi.Client/5.2.6": {
       "sha512": "owAlEIUZXWSnkK8Z1c+zR47A0X6ykF4XjbPok4lQKNuciUfHLGPd6QnI+rt/8KlQ17PmF+I4S3f+m+Qe4IvViw==",
       "type": "package",
@@ -6902,6 +6972,24 @@
         "version.txt"
       ]
     },
+    "Microsoft.Spark/0.3.0": {
+      "sha512": "W5sWKNNq28kJGKWs9Toqfluf7I/+/9H1Aw54ycb2KiZuJBvmdAzMousZc1kINwBRUheByQZ6j/Y6ul0HhaeKCA==",
+      "type": "package",
+      "path": "microsoft.spark/0.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "THIRD-PARTY-NOTICES.TXT",
+        "build/netstandard2.0/Microsoft.Spark.targets",
+        "jars/microsoft-spark-2.3.x-0.3.0.jar",
+        "jars/microsoft-spark-2.4.x-0.3.0.jar",
+        "lib/netstandard2.0/Microsoft.Spark.dll",
+        "lib/netstandard2.0/Microsoft.Spark.xml",
+        "microsoft.spark.0.3.0.nupkg.sha512",
+        "microsoft.spark.nuspec"
+      ]
+    },
     "Microsoft.Win32.Registry/4.5.0": {
       "sha512": "+FWlwd//+Tt56316p00hVePBCouXyEzT86Jb3+AuRotTND0IYn0OO3obs1gnQEs/txEnt+rF2JBGLItTG+Be6A==",
       "type": "package",
@@ -7112,6 +7200,30 @@
         "lib/netstandard1.3/Newtonsoft.Json.Bson.xml",
         "newtonsoft.json.bson.1.0.1.nupkg.sha512",
         "newtonsoft.json.bson.nuspec"
+      ]
+    },
+    "Razorvine.Pyrolite/4.26.0": {
+      "sha512": "FUFWXqrit2HSY6EJnPLCGQGPUepcnP0ZPyjkccxfwyq+D9YFB32msgBHRnh7L+YIVC46LFsVAULe+CzFd+VSkg==",
+      "type": "package",
+      "path": "razorvine.pyrolite/4.26.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Razorvine.Pyrolite.dll",
+        "razorvine.pyrolite.4.26.0.nupkg.sha512",
+        "razorvine.pyrolite.nuspec"
+      ]
+    },
+    "Razorvine.Serpent/1.29.0": {
+      "sha512": "uux2fp2C1uiyLptmtsUab9bb0TNuJI1vhSOv7XlFBCD7gN9MaJjYiT+6SSpCVnuEZWl2ccjeaz187zivIpI6IQ==",
+      "type": "package",
+      "path": "razorvine.serpent/1.29.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Razorvine.Serpent.dll",
+        "razorvine.serpent.1.29.0.nupkg.sha512",
+        "razorvine.serpent.nuspec"
       ]
     },
     "Remotion.Linq/2.2.0": {
@@ -9005,10 +9117,10 @@
         "system.linq.queryable.nuspec"
       ]
     },
-    "System.Memory/4.5.1": {
-      "sha512": "sDJYJpGtTgx+23Ayu5euxG5mAXWdkDb4+b0rD0Cab0M1oQS9H0HXGPriKcqpXuiJDTV7fTp/d+fMDJmnr6sNvA==",
+    "System.Memory/4.5.2": {
+      "sha512": "fvq1GNmUFwbKv+aLVYYdgu/+gc8Nu9oFujOxIjPrsf+meis9JBzTPDL6aP/eeGOz9yPj6rRLUbOjKMpsMEWpNg==",
       "type": "package",
-      "path": "system.memory/4.5.1",
+      "path": "system.memory/4.5.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9020,11 +9132,7 @@
         "lib/netstandard2.0/System.Memory.dll",
         "lib/netstandard2.0/System.Memory.xml",
         "ref/netcoreapp2.1/_._",
-        "ref/netstandard1.1/System.Memory.dll",
-        "ref/netstandard1.1/System.Memory.xml",
-        "ref/netstandard2.0/System.Memory.dll",
-        "ref/netstandard2.0/System.Memory.xml",
-        "system.memory.4.5.1.nupkg.sha512",
+        "system.memory.4.5.2.nupkg.sha512",
         "system.memory.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -9876,10 +9984,10 @@
         "system.runtime.nuspec"
       ]
     },
-    "System.Runtime.CompilerServices.Unsafe/4.5.1": {
-      "sha512": "Zh8t8oqolRaFa9vmOZfdQm/qKejdqz0J9kr7o2Fu0vPeoH3BL1EOXipKWwkWtLT1JPzjByrF19fGuFlNbmPpiw==",
+    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+      "sha512": "wprSFgext8cwqymChhrBLu62LMg/1u92bU+VOwyfBimSPVFXtsNqEWC92Pf9ofzJFlk4IHmJA75EDJn1b2goAQ==",
       "type": "package",
-      "path": "system.runtime.compilerservices.unsafe/4.5.1",
+      "path": "system.runtime.compilerservices.unsafe/4.5.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -9895,7 +10003,7 @@
         "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
         "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
         "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
-        "system.runtime.compilerservices.unsafe.4.5.1.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
         "system.runtime.compilerservices.unsafe.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -11313,10 +11421,10 @@
         "system.threading.tasks.nuspec"
       ]
     },
-    "System.Threading.Tasks.Extensions/4.5.1": {
-      "sha512": "WSKUTtLhPR8gllzIWO2x6l4lmAIfbyMAiTlyXAis4QBDonXK4b4S6F8zGARX4/P8wH3DH+sLdhamCiHn+fTU1A==",
+    "System.Threading.Tasks.Extensions/4.5.2": {
+      "sha512": "BG/TNxDFv0svAzx8OiMXDlsHfGw623BZ8tCXw4YLhDFDvDhNUEV58jKYMGRnkbJNm7c3JNNJDiN7JBMzxRBR2w==",
       "type": "package",
-      "path": "system.threading.tasks.extensions/4.5.1",
+      "path": "system.threading.tasks.extensions/4.5.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -11338,15 +11446,11 @@
         "ref/MonoAndroid10/_._",
         "ref/MonoTouch10/_._",
         "ref/netcoreapp2.1/_._",
-        "ref/netstandard1.0/System.Threading.Tasks.Extensions.dll",
-        "ref/netstandard1.0/System.Threading.Tasks.Extensions.xml",
-        "ref/netstandard2.0/System.Threading.Tasks.Extensions.dll",
-        "ref/netstandard2.0/System.Threading.Tasks.Extensions.xml",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
         "ref/xamarintvos10/_._",
         "ref/xamarinwatchos10/_._",
-        "system.threading.tasks.extensions.4.5.1.nupkg.sha512",
+        "system.threading.tasks.extensions.4.5.2.nupkg.sha512",
         "system.threading.tasks.extensions.nuspec",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -11792,7 +11896,8 @@
     ".NETCoreApp,Version=v2.1": [
       "Microsoft.AspNetCore.App >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.2",
-      "Microsoft.NETCore.App >= 2.1.0"
+      "Microsoft.NETCore.App >= 2.1.0",
+      "Microsoft.Spark >= 0.3.0"
     ]
   },
   "packageFolders": {
@@ -11802,11 +11907,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\OneDrive\\WorkingSpace\\CSharp\\Spark-in-.NET\\CoreSite\\CoreSite.csproj",
+      "projectUniqueName": "E:\\OneDrive\\WorkingSpace\\CSharp\\SparkInDoNET\\CoreSite\\CoreSite.csproj",
       "projectName": "CoreSite",
-      "projectPath": "E:\\OneDrive\\WorkingSpace\\CSharp\\Spark-in-.NET\\CoreSite\\CoreSite.csproj",
+      "projectPath": "E:\\OneDrive\\WorkingSpace\\CSharp\\SparkInDoNET\\CoreSite\\CoreSite.csproj",
       "packagesPath": "C:\\Users\\heyusong\\.nuget\\packages\\",
-      "outputPath": "E:\\OneDrive\\WorkingSpace\\CSharp\\Spark-in-.NET\\CoreSite\\obj\\",
+      "outputPath": "E:\\OneDrive\\WorkingSpace\\CSharp\\SparkInDoNET\\CoreSite\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -11851,6 +11956,10 @@
             "target": "Package",
             "version": "[2.1.0, )",
             "autoReferenced": true
+          },
+          "Microsoft.Spark": {
+            "target": "Package",
+            "version": "[0.3.0, )"
           }
         },
         "imports": [

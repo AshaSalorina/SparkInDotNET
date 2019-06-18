@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\OneDrive\\WorkingSpace\\CSharp\\Spark-in-.NET\\CoreSite\\CoreSite.csproj": {}
+    "E:\\OneDrive\\WorkingSpace\\CSharp\\SparkInDoNET\\CoreSite\\CoreSite.csproj": {}
   },
   "projects": {
-    "E:\\OneDrive\\WorkingSpace\\CSharp\\Spark-in-.NET\\CoreSite\\CoreSite.csproj": {
+    "E:\\OneDrive\\WorkingSpace\\CSharp\\SparkInDoNET\\CoreSite\\CoreSite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\OneDrive\\WorkingSpace\\CSharp\\Spark-in-.NET\\CoreSite\\CoreSite.csproj",
+        "projectUniqueName": "E:\\OneDrive\\WorkingSpace\\CSharp\\SparkInDoNET\\CoreSite\\CoreSite.csproj",
         "projectName": "CoreSite",
-        "projectPath": "E:\\OneDrive\\WorkingSpace\\CSharp\\Spark-in-.NET\\CoreSite\\CoreSite.csproj",
+        "projectPath": "E:\\OneDrive\\WorkingSpace\\CSharp\\SparkInDoNET\\CoreSite\\CoreSite.csproj",
         "packagesPath": "C:\\Users\\heyusong\\.nuget\\packages\\",
-        "outputPath": "E:\\OneDrive\\WorkingSpace\\CSharp\\Spark-in-.NET\\CoreSite\\obj\\",
+        "outputPath": "E:\\OneDrive\\WorkingSpace\\CSharp\\SparkInDoNET\\CoreSite\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -56,6 +56,10 @@
               "target": "Package",
               "version": "[2.1.0, )",
               "autoReferenced": true
+            },
+            "Microsoft.Spark": {
+              "target": "Package",
+              "version": "[0.3.0, )"
             }
           },
           "imports": [

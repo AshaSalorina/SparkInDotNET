@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Spark.Sql;
 
 namespace CoreSite
 {
@@ -14,7 +15,10 @@ namespace CoreSite
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            var spark = SparkSession.Builder().GetOrCreate();
+            var df = spark.Read().Json("people.json");
+            df.Show();
+            //CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
