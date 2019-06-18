@@ -1,6 +1,7 @@
-# SparkForDotNET
+# Spark in DotNET
 Just homework，or you have intresting use this as a demo？  
 Spark课后大作业内容，有爱自取。  
+初步内容为关于视频、电影的分析  
 
 # Environment（环境）
 hadoop ver：  
