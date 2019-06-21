@@ -1,3 +1,6 @@
+/**
+ * movie 按类型图表初始化
+ */
 (function () {
     var item = {
         name: '男性平均分',
