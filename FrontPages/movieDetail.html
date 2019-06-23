@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>电影评论家 - Cuit Spark</title>
+    <title>电影详情 - Cuit Spark</title>
     <!-- CSS Files -->
     <link rel="stylesheet" href="CoreAssets/Css/core.css">
-    <link rel="stylesheet" href="CoreAssets/Css/index.css">
+    <link rel="stylesheet" href="CoreAssets/Css/movie-detail.css">
+    <link rel="stylesheet" href="CoreAssets/Css/progresscircle.css">
     <!-- END CSS Files -->
     <!-- JS Files -->
     <script src="CoreAssets/Js/jquery310.js"></script>
     <script src="CoreAssets/Js/echarts.js"></script>
+    <script src="CoreAssets/Js/progresscircle.js"></script>
     <!-- END JS Files -->
 </head>
 <body>
@@ -46,44 +48,90 @@
     </div>
     <!-- end ContainerBg -->
     <!-- ContainerTitle -->
-    <div class="container-title">系统首页</div>
+    <div class="container-title">电影详细数据</div>
     <!-- end ContainerTitle -->
-    <div id="containerAvgRatings" class="content-body content-body-border">
-        <div class="content-left">
-            <div class="content-title">电影平均评分统计</div>
-            <div id="movieTypeCharts">
-                <div class="mt-chart-legend" id="mtChartSexLegend">
+    <div class="content-body content-body-white">
+        <div class="movie-poster">
+            <img src="CoreAssets/Images/Movies/Animation.jpg"/>
+        </div>
+        <div class="movie-info-container">
+            <div class="movie-rating">
+                <div class="circle-chart circle-chart-dark" data-percentage="0" data-inner="rating"></div>
+            </div>
+            <div class="movie-title">
+                <span class="movie-title-zh"></span>
+                <span class="movie-title-era">(2011)</span>
+            </div>
+            <div class="movie-title-en">Fate/Stay Night</div>
+            <div class="movie-tags">Animate/Homey/Love/Documentary</div>
+            <div class="movie-data-info">
+                影片评价<span>3.98</span>分
+                <span>175</span>条评分数据
+                <span>5</span>个用户标签
+                <span>2011</span>年上映
+            </div>
+            <div class="movie-data-container">
+                <div class="movie-rating-chart-container">
+                    <div class="movie-rating-chart" id="movieRatingChart"></div>
                 </div>
-                <div class="mt-chart-item" id="mtChartSexItem">
-                    <div class="mt-chart-title">性别</div>
-                    <div class="mt-chart-label">
-                        <img src="CoreAssets/Images/chart-label.png"/>
+                <div class="movie-describe-container">
+                    <div class="user-tags">
+                        <div class="user-tags-title">用户标记</div>
+                        <div class="user-tags-content">
+                            <div class="user-tag"><span class="user-name">Alien Walker</span>:
+                                <span class="tag-content">Good Movie</span></div>
+                            <div class="user-tag"><span class="user-name">Sam</span>:
+                                <span class="tag-content">Best</span></div>
+                            <div class="user-tag"><span class="user-name">Alien</span>:
+                                <span class="tag-content">Good Movie</span></div>
+                            <div class="user-tag"><span class="user-name">Sam</span>:
+                                <span class="tag-content">Best</span></div>
+                            <div class="user-tag"><span class="user-name">Alien</span>:
+                                <span class="tag-content">Good Movie</span></div>
+                            <div class="user-tag"><span class="user-name">Sam</span>:
+                                <span class="tag-content">Best</span></div>
+                        </div>
                     </div>
-                    <div class="mt-chart-content" id="mtChartGender"></div>
-                </div>
-                <div class="mt-chart-legend" id="mtChartTypeLegend">
-                </div>
-                <div class="mt-chart-item" id="mtChartTypeItem">
-                    <div class="mt-chart-title">类型</div>
-                    <div class="mt-chart-label">
-                        <img src="CoreAssets/Images/chart-label.png"/>
+                    <div class="user-recent">
+                        <div class="user-recent-title">最近评分
+                            <small>(4)</small>
+                        </div>
+                        <div class="user-recent-content">
+                            <div class="rating-title">
+                                <div class="user-name">用户昵称</div>
+                                <div class="rating-value">评分</div>
+                                <div class="rating-date">时间</div>
+                            </div>
+                            <ul class="rating-list">
+                                <li>
+                                    <span class="user-name">Alene</span>
+                                    <span class="rating-value">4.0</span>
+                                    <span class="rating-date">2019-06-23 16:27</span>
+                                </li>
+                                <li>
+                                    <span class="user-name">Tylor Swift</span>
+                                    <span class="rating-value">5.0</span>
+                                    <span class="rating-date">2019-06-21 15:44</span>
+                                </li>
+                                <li>
+                                    <span class="user-name">Tom</span>
+                                    <span class="rating-value">3.0</span>
+                                    <span class="rating-date">2019-06-20 12:31</span>
+                                </li>
+                                <li>
+                                    <span class="user-name">Kral</span>
+                                    <span class="rating-value">4.0</span>
+                                    <span class="rating-date">2019-06-19 21:05</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="mt-chart-content" id="mtChartType"></div>
                 </div>
             </div>
         </div>
-        <div class="content-right">
-            <div class="content-right-body content-body-border">
-                <div class="md-chart-item" id="mdOccupationInfo"></div>
-                <div class="md-chart-split"></div>
-                <div class="md-chart-item" id="mdAreaInfo"></div>
-            </div>
-        </div>
-        <div class="clear-both"></div>
     </div>
 </div>
 <!-- END Container -->
-
 <!-- Left Leader -->
 <div class="left-leader">
     <div class="left-btn">
@@ -230,7 +278,7 @@
 </div>
 <!-- END Footer -->
 <!-- searchDialog -->
-<div id="searchPanel" class="search-panel search-panel-hide" >
+<div class="search-panel search-panel-hide" id="searchPanel">
     <div class="search-start-animate">
         <img src="CoreAssets/Images/show-search.png">
     </div>
@@ -340,9 +388,9 @@
 <!-- END Audios -->
 <!-- Page JS Files -->
 <script src="CoreAssets/Js/core.js"></script>
-<script src="CoreAssets/Js/mt-chart.js"></script>
-<script src="CoreAssets/Js/md-chart.js"></script>
 <script src="CoreAssets/Js/leader.js"></script>
+<script src="CoreAssets/Js/movie-detail.js"></script>
+<script src="CoreAssets/Js/rating-chart.js"></script>
 <!-- END Page  JS Files -->
 </body>
 </html>

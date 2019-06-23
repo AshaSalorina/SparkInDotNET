@@ -1,5 +1,5 @@
 $(function () {
-    let searchPanel = $("#searchPanel");
+    var searchPanel = $("#searchPanel");
     $(".searchClose").click(function () {
         $(searchPanel).removeClass("search-panel-show");
         $(searchPanel).addClass("search-panel-hide");
@@ -11,7 +11,10 @@ $(function () {
         rawPlayer.playSound("click");
         rawPlayer.playSound("loading");
     });
-    $(".btn,.right-btn,.left-btn").mouseenter(function () {
-        rawPlayer.playSound("hover");
+    $(".right-btn,.left-btn").mouseenter(function () {
+        rawPlayer.playSound("hover3");
+    });
+    $(".btn").mouseenter(function () {
+        rawPlayer.playSound("hover2");
     });
 });

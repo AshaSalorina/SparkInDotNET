@@ -5,10 +5,10 @@ var rawPlayer = (function () {
     var rawPlayerObj = {};
     rawPlayerObj.playSound = function (soundName) {
         var audioElem = $("#sound-" + soundName)[0];
-        if (!audioElem.paused) {
+        if (audioElem.readyState === 4) {
             audioElem.currentTime = 0;
+            audioElem.play();
         }
-        audioElem.play();
     };
     return rawPlayerObj;
 })();
@@ -204,9 +204,9 @@ var inputController = (function () {
             radioSelect(this, group, isAllBtn, isSelect, radioList);
         });
         $(".text-input input").focus(function () {
-            rawPlayer.playSound("hover");
+            rawPlayer.playSound("hover3");
         }).blur(function () {
-            rawPlayer.playSound("hover");
+            rawPlayer.playSound("hover3");
         });
     };
     var addChangeListener = function () {

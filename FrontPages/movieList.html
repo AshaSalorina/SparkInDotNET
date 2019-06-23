@@ -2,14 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>电影评论家 - Cuit Spark</title>
+    <title>电影列表 - Cuit Spark</title>
     <!-- CSS Files -->
     <link rel="stylesheet" href="CoreAssets/Css/core.css">
-    <link rel="stylesheet" href="CoreAssets/Css/index.css">
+    <link rel="stylesheet" href="CoreAssets/Css/movie-list.css">
+    <link rel="stylesheet" href="CoreAssets/Css/progresscircle.css">
     <!-- END CSS Files -->
     <!-- JS Files -->
     <script src="CoreAssets/Js/jquery310.js"></script>
     <script src="CoreAssets/Js/echarts.js"></script>
+    <script src="CoreAssets/Js/progresscircle.js"></script>
     <!-- END JS Files -->
 </head>
 <body>
@@ -46,44 +48,14 @@
     </div>
     <!-- end ContainerBg -->
     <!-- ContainerTitle -->
-    <div class="container-title">系统首页</div>
+    <div class="container-title">电影列表</div>
     <!-- end ContainerTitle -->
-    <div id="containerAvgRatings" class="content-body content-body-border">
-        <div class="content-left">
-            <div class="content-title">电影平均评分统计</div>
-            <div id="movieTypeCharts">
-                <div class="mt-chart-legend" id="mtChartSexLegend">
-                </div>
-                <div class="mt-chart-item" id="mtChartSexItem">
-                    <div class="mt-chart-title">性别</div>
-                    <div class="mt-chart-label">
-                        <img src="CoreAssets/Images/chart-label.png"/>
-                    </div>
-                    <div class="mt-chart-content" id="mtChartGender"></div>
-                </div>
-                <div class="mt-chart-legend" id="mtChartTypeLegend">
-                </div>
-                <div class="mt-chart-item" id="mtChartTypeItem">
-                    <div class="mt-chart-title">类型</div>
-                    <div class="mt-chart-label">
-                        <img src="CoreAssets/Images/chart-label.png"/>
-                    </div>
-                    <div class="mt-chart-content" id="mtChartType"></div>
-                </div>
-            </div>
+    <div id="moviesList" class="content-body content-body-border">
+        <div class="movies-container">
         </div>
-        <div class="content-right">
-            <div class="content-right-body content-body-border">
-                <div class="md-chart-item" id="mdOccupationInfo"></div>
-                <div class="md-chart-split"></div>
-                <div class="md-chart-item" id="mdAreaInfo"></div>
-            </div>
-        </div>
-        <div class="clear-both"></div>
     </div>
 </div>
 <!-- END Container -->
-
 <!-- Left Leader -->
 <div class="left-leader">
     <div class="left-btn">
@@ -230,7 +202,7 @@
 </div>
 <!-- END Footer -->
 <!-- searchDialog -->
-<div id="searchPanel" class="search-panel search-panel-hide" >
+<div class="search-panel search-panel-hide" id="searchPanel">
     <div class="search-start-animate">
         <img src="CoreAssets/Images/show-search.png">
     </div>
@@ -328,6 +300,18 @@
         <div class="legend-item-title">Gender</div>
         <div class="clear-both"></div>
     </div>
+    <div class="movie-item">
+        <div class="movie-info" data-color="#75B9CE">
+            <div class="movie-title">That&nbsp;Wife</div>
+            <div class="movie-era">(2019)</div>
+            <div class="rating-container">
+                <div class="circle-chart" data-percentage="0" data-inner="rating"></div>
+            </div>
+            <div class="movie-type-tags"></div>
+            <div class="movie-read-more">&gt; MovieData</div>
+        </div>
+        <img class="movie-bg" src="CoreAssets/Images/Movies/Fantasy.jpg"/>
+    </div>
 </div>
 <!-- END Templates -->
 <!-- Audios -->
@@ -340,9 +324,8 @@
 <!-- END Audios -->
 <!-- Page JS Files -->
 <script src="CoreAssets/Js/core.js"></script>
-<script src="CoreAssets/Js/mt-chart.js"></script>
-<script src="CoreAssets/Js/md-chart.js"></script>
 <script src="CoreAssets/Js/leader.js"></script>
+<script src="CoreAssets/Js/movies.js"></script>
 <!-- END Page  JS Files -->
 </body>
 </html>
