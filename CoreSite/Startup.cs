@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,7 @@ namespace CoreSite
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,7 +37,41 @@ namespace CoreSite
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseWebSockets();
+
+            app.UseSignalR((routes) =>
+            {
+                routes.MapHub<testDir.SignalCenter.HwSignalCenter>("/sparkMovie");
+            });
+
+            app.UseStaticFiles();
+
+            //始终最后声明
             app.UseMvc();
+
+            #region 一种websocket用法，很蠢
+
+            //app.Use(async (context, next) =>
+            //{
+            //    if (context.Request.Path == "/sparkMovie")
+            //    {
+            //        if (context.WebSockets.IsWebSocketRequest)
+            //        {
+            //            WebSocket webSocket = await context.WebSockets.AcceptWebSocketAsync();
+            //            await testDir.HwWebSocketMidle.HwReport(context, webSocket);
+            //        }
+            //        else
+            //        {
+            //            context.Response.StatusCode = 400;
+            //        }
+            //    }
+            //    else
+            //    {
+            //        await next();
+            //    }
+            //});
+
+            #endregion 一种websocket用法，很蠢
         }
     }
 }

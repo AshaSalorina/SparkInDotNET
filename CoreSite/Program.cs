@@ -15,10 +15,10 @@ namespace CoreSite
     {
         public static void Main(string[] args)
         {
-            var spark = SparkSession.Builder().GetOrCreate();
-            var df = spark.Read().Json("people.json");
-            df.Show();
-            //CreateWebHostBuilder(args).Build().Run();
+            //var spark = SparkSession.Builder().GetOrCreate();
+            //Modles.testDir.testDataFrame.dataFrame = spark.Read().Csv("/spark/test1/test1.txt");
+            //Modles.testDir.testDataFrame.dataFrame.Show();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

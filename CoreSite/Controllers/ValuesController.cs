@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Spark;
+using Microsoft.Spark.Sql;
 
 namespace CoreSite.Controllers
 {
@@ -14,7 +16,20 @@ namespace CoreSite.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            if (Modles.testDir.testDataFrame.dataFrame == null)
+            {
+                return NotFound();
+            }
+            var rstr = new List<string>();
+
+            var dFEnume = Modles.testDir.testDataFrame.dataFrame.Columns().GetEnumerator();
+
+            while (dFEnume.MoveNext())
+            {
+                rstr.Add(dFEnume.Current);
+            }
+            return rstr;
+            //return NotFound();
         }
 
         // GET api/values/5
