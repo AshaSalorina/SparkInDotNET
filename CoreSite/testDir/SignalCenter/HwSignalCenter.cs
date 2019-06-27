@@ -9,10 +9,10 @@ namespace CoreSite.testDir.SignalCenter
 {
     public class HwSignalCenter : Hub
     {
-        public async Task SendMessage(string user, string message)
+        public async Task SMS(string user, string message)
         {
             Console.WriteLine(message);
-            await Clients.Caller.SendAsync("ReceiveMessage", "server", $"Hello {user} WebSocket");
+            await Clients.Caller.SendAsync("RMS", "server", $"Hello {user} WebSocket");
         }
     }
 }
