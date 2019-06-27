@@ -15,9 +15,14 @@ namespace CoreSite
     {
         public static void Main(string[] args)
         {
+            #region Test
+
             //var spark = SparkSession.Builder().GetOrCreate();
             //Modles.testDir.testDataFrame.dataFrame = spark.Read().Csv("/spark/test1/test1.txt");
             //Modles.testDir.testDataFrame.dataFrame.Show();
+
+            #endregion Test
+
             CreateWebHostBuilder(args).Build().Run();
         }
 
