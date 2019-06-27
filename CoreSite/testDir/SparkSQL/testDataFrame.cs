@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Spark.Sql;
 
-namespace CoreSite.Modles.testDir
+namespace CoreSite.testDir
 {
     public class testDataFrame
     {

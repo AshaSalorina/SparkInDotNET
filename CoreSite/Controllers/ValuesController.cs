@@ -16,13 +16,13 @@ namespace CoreSite.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            if (Modles.testDir.testDataFrame.dataFrame == null)
+            if (testDir.testDataFrame.dataFrame == null)
             {
                 return NotFound();
             }
             var rstr = new List<string>();
 
-            var dFEnume = Modles.testDir.testDataFrame.dataFrame.Columns().GetEnumerator();
+            var dFEnume = testDir.testDataFrame.dataFrame.Columns().GetEnumerator();
 
             while (dFEnume.MoveNext())
             {

@@ -10,9 +10,21 @@ namespace CoreSite.testDir.SparkSQL
 {
     public class SparkSqlForSqlServer
     {
-        public static async Task ShowData(SparkSession sparkSession)
+        public static async Task ReadData(SparkSession sparkSession)
         {
-            //var spsql = sparkSession.Read().s
+            //更建议使用配置文件方式进行连接
+            //这里作为测试就不多整了
+            await Task.Run(() =>
+            {
+                testDir.testDataFrame.dataFrame = sparkSession.Read().Format("jdbc")
+                  .Option("url", "jdbc:sqlserver://127.0.0.1:1433")
+                  .Option("databaseName", "sparkDB")
+                  .Option("driver", "com.microsoft.sqlserver.jdbc.SQLServerDriver")
+                  .Option("dbtable", "TestTable")
+                  .Option("user", "spark")
+                  .Option("password", "aspcore")
+                  .Load();
+            });
         }
     }
 }
