@@ -6,31 +6,35 @@
     <title>WebsocketTest</title>
 
     <script src="signalr.min.js"></script>
-    <script type="text/javascript">
-        var connection = new signalR.HubConnectionBuilder().withUrl("/sparkMovie").build();
 
-        connection.on("ReceiveMessage", function (user, message) {
-            alert(message);
-        });
 
-        connection.start().then(function () {
-            document.getElementById("sendButton").disabled = false;
-        }).catch(function (err) {
-            return console.error(err.toString());
-        });
-
-        document.getElementById("sendWebsocket").addEventListener("click", function (event) {
-            var user = "whatUser";
-            var message = "HelloWebsocket";
-            connection.invoke("SendMessage", user, message).catch(function (err) {
-                return console.error(err.toString());
-            });
-            event.preventDefault();
-        });
-    </script>
 </head>
 <body>
 
-    <button id="sendWebsocket" class="pass">Send HelloWebSocket</button>
+
+ <button id="sendWebsocket" class="pass">发送HelloWebSocket</button>
+ <script type="text/javascript">
+     var connection = new signalR.HubConnectionBuilder().withUrl("/sparkMovie").build();
+
+     connection.on("ReceiveMessage", function (user, message) {
+         alert(message);
+     });
+
+     connection.start().then(function(){
+        alert("Send Test");
+     }).catch(function (err) {
+         return console.error(err.toString());
+     });
+
+     document.getElementById("sendWebsocket").addEventListener("click", function (event) {
+         var user = "whatUser";
+         var message = "HelloWebsocket";
+         connection.invoke("SendMessage", user, message).catch(function (err) {
+             return console.error(err.toString());
+         });
+         event.preventDefault();
+     });
+
+ </script>
 </body>
 </html>

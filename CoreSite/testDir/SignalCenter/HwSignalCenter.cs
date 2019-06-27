@@ -12,7 +12,7 @@ namespace CoreSite.testDir.SignalCenter
         public async Task SendMessage(string user, string message)
         {
             Console.WriteLine(message);
-            await Clients.Caller.SendAsync("sparkMovie", "HelloWebSocket");
+            await Clients.Caller.SendAsync("ReceiveMessage", "server", $"Hello {user} WebSocket");
         }
     }
 }
