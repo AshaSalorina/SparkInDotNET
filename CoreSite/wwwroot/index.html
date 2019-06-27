@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -13,336 +13,335 @@
     <!-- END JS Files -->
 </head>
 <body>
-<!-- Page Background -->
-<video autoplay="autoplay" loop="loop" muted="muted" poster="CoreAssets/Images/background-holder.jpg">
-    <source src="CoreAssets/Raw/background.webm" type="video/webm">
-    <source src="CoreAssets/Raw/background.mp4" type="video/mp4">
-</video>
-<div class="video-mask"></div>
-<!-- END Page Background -->
-<!-- Banner -->
-<div class="banner">
-    <!-- BackgroundImg -->
-    <div class="banner-bg-img">
-        <img src="CoreAssets/Images/banner-bg.png"/>
+    <!-- Page Background -->
+    <video autoplay="autoplay" loop="loop" muted="muted" poster="CoreAssets/Images/background-holder.jpg">
+        <source src="CoreAssets/Raw/background.webm" type="video/webm">
+        <source src="CoreAssets/Raw/background.mp4" type="video/mp4">
+    </video>
+    <div class="video-mask"></div>
+    <!-- END Page Background -->
+    <!-- Banner -->
+    <div class="banner">
+        <!-- BackgroundImg -->
+        <div class="banner-bg-img">
+            <img src="CoreAssets/Images/banner-bg.png" />
+        </div>
+        <!-- END BackgroundImg -->
+        <!-- BackgroundImg -->
+        <div class="banner-title">
+            <div class="title-zh">CUIT电影评论家可视化数据监测展示平台</div>
+            <div class="title-en">Visual Internet Data Monitoring and Display Platform</div>
+        </div>
+        <!-- END BackgroundImg -->
     </div>
-    <!-- END BackgroundImg -->
-    <!-- BackgroundImg -->
-    <div class="banner-title">
-        <div class="title-zh">CUIT电影评论家可视化数据监测展示平台</div>
-        <div class="title-en">Visual Internet Data Monitoring and Display Platform</div>
-    </div>
-    <!-- END BackgroundImg -->
-</div>
-<!-- END Banner -->
-<!-- Container -->
-<div class="container">
-    <!-- ContainerBg -->
-    <div class="container-bg-img">
-        <img src="CoreAssets/Images/pannel-bg.png"/>
-    </div>
-    <div class="container-bg-animate">
-        <img src="CoreAssets/Images/pannel-bg-animate.png"/>
-    </div>
-    <!-- end ContainerBg -->
-    <!-- ContainerTitle -->
-    <div class="container-title">系统首页</div>
-    <!-- end ContainerTitle -->
-    <div id="containerAvgRatings" class="content-body content-body-border">
-        <div class="content-left">
-            <div class="content-title">电影平均评分统计</div>
-            <div id="movieTypeCharts">
-                <div class="mt-chart-legend" id="mtChartSexLegend">
-                </div>
-                <div class="mt-chart-item" id="mtChartSexItem">
-                    <div class="mt-chart-title">性别</div>
-                    <div class="mt-chart-label">
-                        <img src="CoreAssets/Images/chart-label.png"/>
+    <!-- END Banner -->
+    <!-- Container -->
+    <div class="container">
+        <!-- ContainerBg -->
+        <div class="container-bg-img">
+            <img src="CoreAssets/Images/pannel-bg.png" />
+        </div>
+        <div class="container-bg-animate">
+            <img src="CoreAssets/Images/pannel-bg-animate.png" />
+        </div>
+        <!-- end ContainerBg -->
+        <!-- ContainerTitle -->
+        <div class="container-title">系统首页</div>
+        <!-- end ContainerTitle -->
+        <div id="containerAvgRatings" class="content-body content-body-border">
+            <div class="content-left">
+                <div class="content-title">电影平均评分统计</div>
+                <div id="movieTypeCharts">
+                    <div class="mt-chart-legend" id="mtChartSexLegend">
                     </div>
-                    <div class="mt-chart-content" id="mtChartGender"></div>
-                </div>
-                <div class="mt-chart-legend" id="mtChartTypeLegend">
-                </div>
-                <div class="mt-chart-item" id="mtChartTypeItem">
-                    <div class="mt-chart-title">类型</div>
-                    <div class="mt-chart-label">
-                        <img src="CoreAssets/Images/chart-label.png"/>
+                    <div class="mt-chart-item" id="mtChartSexItem">
+                        <div class="mt-chart-title">性别</div>
+                        <div class="mt-chart-label">
+                            <img src="CoreAssets/Images/chart-label.png" />
+                        </div>
+                        <div class="mt-chart-content" id="mtChartGender"></div>
                     </div>
-                    <div class="mt-chart-content" id="mtChartType"></div>
-                </div>
-            </div>
-        </div>
-        <div class="content-right">
-            <div class="content-right-body content-body-border">
-                <div class="md-chart-item" id="mdOccupationInfo"></div>
-                <div class="md-chart-split"></div>
-                <div class="md-chart-item" id="mdAreaInfo"></div>
-            </div>
-        </div>
-        <div class="clear-both"></div>
-    </div>
-</div>
-<!-- END Container -->
-
-<!-- Left Leader -->
-<div class="left-leader">
-    <div class="left-btn">
-        <img src="CoreAssets/Images/left-btn.png"/>
-        <div class="leader-btn-container">
-            <div class="btn-title">系统首页</div>
-            <div class="btn-icon">
-                <img src="CoreAssets/Images/index-btn-blue.png">
-            </div>
-        </div>
-    </div>
-    <div class="left-btn searchOpen">
-        <img src="CoreAssets/Images/left-btn.png"/>
-        <div class="leader-btn-container">
-            <div class="btn-title">电影搜索</div>
-            <div class="btn-icon">
-                <img src="CoreAssets/Images/search-btn-blue.png">
-            </div>
-        </div>
-    </div>
-    <div class="left-btn">
-        <img src="CoreAssets/Images/left-btn.png"/>
-        <div class="leader-btn-container">
-            <div class="btn-title">用户分析</div>
-            <div class="btn-icon">
-                <img src="CoreAssets/Images/other-btn-blue.png">
-            </div>
-        </div>
-    </div>
-    <div class="left-btn">
-        <img src="CoreAssets/Images/left-btn.png"/>
-        <div class="leader-btn-container">
-            <div class="btn-title">近期报表</div>
-            <div class="btn-icon">
-                <img src="CoreAssets/Images/document-btn-blue.png">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END Left Leader -->
-<!-- Right Leader -->
-<div class="right-leader">
-    <div class="right-btn">
-        <img src="CoreAssets/Images/right-btn.png"/>
-        <div class="leader-btn-container">
-            <div class="btn-title">系统首页</div>
-            <div class="btn-icon">
-                <img src="CoreAssets/Images/index-btn-blue.png">
-            </div>
-        </div>
-    </div>
-    <div class="right-btn searchOpen">
-        <img src="CoreAssets/Images/right-btn.png"/>
-        <div class="leader-btn-container">
-            <div class="btn-title">电影搜索</div>
-            <div class="btn-icon">
-                <img src="CoreAssets/Images/search-btn-blue.png">
-            </div>
-        </div>
-    </div>
-    <div class="right-btn">
-        <img src="CoreAssets/Images/right-btn.png"/>
-        <div class="leader-btn-container">
-            <div class="btn-title">用户分析</div>
-            <div class="btn-icon">
-                <img src="CoreAssets/Images/other-btn-blue.png">
-            </div>
-        </div>
-    </div>
-    <div class="right-btn">
-        <img src="CoreAssets/Images/right-btn.png"/>
-        <div class="leader-btn-container">
-            <div class="btn-title">近期报表</div>
-            <div class="btn-icon">
-                <img src="CoreAssets/Images/document-btn-blue.png">
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END Right Leader -->
-<!-- Footer -->
-<div class="footer">
-    <div class="footer-left">
-        <div class="big-btn-container btn">
-            <img src="CoreAssets/Images/footer-big-btn-left.svg">
-            <div class="big-btns">
-                <div class="big-btn">
-                    <img src="CoreAssets/Images/index-btn.png"/>
-                </div>
-                <div class="big-btn searchOpen">
-                    <img src="CoreAssets/Images/search-btn.png"/>
-                </div>
-                <div class="big-btn">
-                    <img src="CoreAssets/Images/setting-btn.png"/>
-                </div>
-                <div class="clear-both"></div>
-            </div>
-        </div>
-        <div class="btn-container btn">
-            <img src="CoreAssets/Images/footer-btn-left.svg">
-            <div class="normal-btn">关注</div>
-        </div>
-        <div class="btn-container btn">
-            <img src="CoreAssets/Images/footer-btn-left.svg">
-            <div class="normal-btn">点赞</div>
-        </div>
-        <div class="btn-container btn">
-            <img src="CoreAssets/Images/footer-btn-left.svg">
-            <div class="normal-btn">投币</div>
-        </div>
-        <div class="clear-both"></div>
-    </div>
-    <div class="footer-center"></div>
-    <div class="footer-right">
-        <div class="big-btn-container btn">
-            <img src="CoreAssets/Images/footer-big-btn-right.svg">
-            <div class="big-btns">
-                <div class="big-btn">
-                    <img src="CoreAssets/Images/index-btn.png"/>
-                </div>
-                <div class="big-btn searchOpen">
-                    <img src="CoreAssets/Images/search-btn.png"/>
-                </div>
-                <div class="big-btn">
-                    <img src="CoreAssets/Images/setting-btn.png"/>
-                </div>
-                <div class="clear-both"></div>
-            </div>
-        </div>
-        <div class="btn-container btn">
-            <img src="CoreAssets/Images/footer-btn-right.svg">
-            <div class="normal-btn">关注</div>
-        </div>
-        <div class="btn-container btn">
-            <img src="CoreAssets/Images/footer-btn-right.svg">
-            <div class="normal-btn">点赞</div>
-        </div>
-        <div class="btn-container btn">
-            <img src="CoreAssets/Images/footer-btn-right.svg">
-            <div class="normal-btn">投币</div>
-        </div>
-        <div class="clear-both"></div>
-    </div>
-</div>
-<!-- END Footer -->
-<!-- searchDialog -->
-<div id="searchPanel" class="search-panel search-panel-hide" >
-    <div class="search-start-animate">
-        <img src="CoreAssets/Images/show-search.png">
-    </div>
-    <div class="search-dialog">
-        <img src="CoreAssets/Images/search-bg-shadow.png" class="search-shadow-animate"/>
-        <img src="CoreAssets/Images/search-bg.png"/>
-        <div class="search-logo">
-            <img src="CoreAssets/Images/search-logo.png"/>
-        </div>
-        <div class="search-form">
-            <div class="search-input">
-                <div class="search-title">分数范围</div>
-                <div class="number-input" id="ratingLower">
-                    <div class="up-number-btn input-control-btn">
-                        <img src="CoreAssets/Images/up-btn.png"/>
+                    <div class="mt-chart-legend" id="mtChartTypeLegend">
                     </div>
-                    <div class="down-number-btn input-control-btn">
-                        <img src="CoreAssets/Images/down-btn.png"/>
+                    <div class="mt-chart-item" id="mtChartTypeItem">
+                        <div class="mt-chart-title">类型</div>
+                        <div class="mt-chart-label">
+                            <img src="CoreAssets/Images/chart-label.png" />
+                        </div>
+                        <div class="mt-chart-content" id="mtChartType"></div>
                     </div>
-                    <label>
-                        <input type="text" value="0.00" data-max="#ratingMax" data-min="0.0" data-step="0.1"
-                               data-fixed="2" id="ratingMin" autocomplete="off"/>
-                    </label>
+                </div>
+            </div>
+            <div class="content-right">
+                <div class="content-right-body content-body-border">
+                    <div class="md-chart-item" id="mdOccupationInfo"></div>
+                    <div class="md-chart-split"></div>
+                    <div class="md-chart-item" id="mdAreaInfo"></div>
+                </div>
+            </div>
+            <div class="clear-both"></div>
+        </div>
+    </div>
+    <!-- END Container -->
+    <!-- Left Leader -->
+    <div class="left-leader">
+        <div class="left-btn">
+            <img src="CoreAssets/Images/left-btn.png" />
+            <div class="leader-btn-container">
+                <div class="btn-title">系统首页</div>
+                <div class="btn-icon">
+                    <img src="CoreAssets/Images/index-btn-blue.png">
+                </div>
+            </div>
+        </div>
+        <div class="left-btn searchOpen">
+            <img src="CoreAssets/Images/left-btn.png" />
+            <div class="leader-btn-container">
+                <div class="btn-title">电影搜索</div>
+                <div class="btn-icon">
+                    <img src="CoreAssets/Images/search-btn-blue.png">
+                </div>
+            </div>
+        </div>
+        <div class="left-btn">
+            <img src="CoreAssets/Images/left-btn.png" />
+            <div class="leader-btn-container">
+                <div class="btn-title">用户分析</div>
+                <div class="btn-icon">
+                    <img src="CoreAssets/Images/other-btn-blue.png">
+                </div>
+            </div>
+        </div>
+        <div class="left-btn">
+            <img src="CoreAssets/Images/left-btn.png" />
+            <div class="leader-btn-container">
+                <div class="btn-title">近期报表</div>
+                <div class="btn-icon">
+                    <img src="CoreAssets/Images/document-btn-blue.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Left Leader -->
+    <!-- Right Leader -->
+    <div class="right-leader">
+        <div class="right-btn">
+            <img src="CoreAssets/Images/right-btn.png" />
+            <div class="leader-btn-container">
+                <div class="btn-title">系统首页</div>
+                <div class="btn-icon">
+                    <img src="CoreAssets/Images/index-btn-blue.png">
+                </div>
+            </div>
+        </div>
+        <div class="right-btn searchOpen">
+            <img src="CoreAssets/Images/right-btn.png" />
+            <div class="leader-btn-container">
+                <div class="btn-title">电影搜索</div>
+                <div class="btn-icon">
+                    <img src="CoreAssets/Images/search-btn-blue.png">
+                </div>
+            </div>
+        </div>
+        <div class="right-btn">
+            <img src="CoreAssets/Images/right-btn.png" />
+            <div class="leader-btn-container">
+                <div class="btn-title">用户分析</div>
+                <div class="btn-icon">
+                    <img src="CoreAssets/Images/other-btn-blue.png">
+                </div>
+            </div>
+        </div>
+        <div class="right-btn">
+            <img src="CoreAssets/Images/right-btn.png" />
+            <div class="leader-btn-container">
+                <div class="btn-title">近期报表</div>
+                <div class="btn-icon">
+                    <img src="CoreAssets/Images/document-btn-blue.png">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END Right Leader -->
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-left">
+            <div class="big-btn-container btn">
+                <img src="CoreAssets/Images/footer-big-btn-left.svg">
+                <div class="big-btns">
+                    <div class="big-btn">
+                        <img src="CoreAssets/Images/index-btn.png" />
+                    </div>
+                    <div class="big-btn searchOpen">
+                        <img src="CoreAssets/Images/search-btn.png" />
+                    </div>
+                    <div class="big-btn">
+                        <img src="CoreAssets/Images/setting-btn.png" />
+                    </div>
                     <div class="clear-both"></div>
                 </div>
-                <div class="search-split">~</div>
-                <div class="number-input" id="ratingHighter">
-                    <div class="up-number-btn input-control-btn">
-                        <img src="CoreAssets/Images/up-btn.png"/>
+            </div>
+            <div class="btn-container btn">
+                <img src="CoreAssets/Images/footer-btn-left.svg">
+                <div class="normal-btn">关注</div>
+            </div>
+            <div class="btn-container btn">
+                <img src="CoreAssets/Images/footer-btn-left.svg">
+                <div class="normal-btn">点赞</div>
+            </div>
+            <div class="btn-container btn">
+                <img src="CoreAssets/Images/footer-btn-left.svg">
+                <div class="normal-btn">投币</div>
+            </div>
+            <div class="clear-both"></div>
+        </div>
+        <div class="footer-center"></div>
+        <div class="footer-right">
+            <div class="big-btn-container btn">
+                <img src="CoreAssets/Images/footer-big-btn-right.svg">
+                <div class="big-btns">
+                    <div class="big-btn">
+                        <img src="CoreAssets/Images/index-btn.png" />
                     </div>
-                    <div class="down-number-btn input-control-btn">
-                        <img src="CoreAssets/Images/down-btn.png"/>
+                    <div class="big-btn searchOpen">
+                        <img src="CoreAssets/Images/search-btn.png" />
                     </div>
-                    <label>
-                        <input type="text" value="5.00" data-max="5.0" data-min="#ratingMin" data-step="0.1"
-                               data-fixed="2" id="ratingMax" autocomplete="off"/>
-                    </label>
+                    <div class="big-btn">
+                        <img src="CoreAssets/Images/setting-btn.png" />
+                    </div>
                     <div class="clear-both"></div>
                 </div>
-                <div class="clear-both"></div>
             </div>
-            <div class="search-input">
-                <div class="search-title">
-                    <small>(最多三项)</small>
-                    电影类型
+            <div class="btn-container btn">
+                <img src="CoreAssets/Images/footer-btn-right.svg">
+                <div class="normal-btn">关注</div>
+            </div>
+            <div class="btn-container btn">
+                <img src="CoreAssets/Images/footer-btn-right.svg">
+                <div class="normal-btn">点赞</div>
+            </div>
+            <div class="btn-container btn">
+                <img src="CoreAssets/Images/footer-btn-right.svg">
+                <div class="normal-btn">投币</div>
+            </div>
+            <div class="clear-both"></div>
+        </div>
+    </div>
+    <!-- END Footer -->
+    <!-- searchDialog -->
+    <div id="searchPanel" class="search-panel search-panel-hide">
+        <div class="search-start-animate">
+            <img src="CoreAssets/Images/show-search.png">
+        </div>
+        <div class="search-dialog">
+            <img src="CoreAssets/Images/search-bg-shadow.png" class="search-shadow-animate" />
+            <img src="CoreAssets/Images/search-bg.png" />
+            <div class="search-logo">
+                <img src="CoreAssets/Images/search-logo.png" />
+            </div>
+            <div class="search-form">
+                <div class="search-input">
+                    <div class="search-title">分数范围</div>
+                    <div class="number-input" id="ratingLower">
+                        <div class="up-number-btn input-control-btn">
+                            <img src="CoreAssets/Images/up-btn.png" />
+                        </div>
+                        <div class="down-number-btn input-control-btn">
+                            <img src="CoreAssets/Images/down-btn.png" />
+                        </div>
+                        <label>
+                            <input type="text" value="0.00" data-max="#ratingMax" data-min="0.0" data-step="0.1"
+                                   data-fixed="2" id="ratingMin" autocomplete="off" />
+                        </label>
+                        <div class="clear-both"></div>
+                    </div>
+                    <div class="search-split">~</div>
+                    <div class="number-input" id="ratingHighter">
+                        <div class="up-number-btn input-control-btn">
+                            <img src="CoreAssets/Images/up-btn.png" />
+                        </div>
+                        <div class="down-number-btn input-control-btn">
+                            <img src="CoreAssets/Images/down-btn.png" />
+                        </div>
+                        <label>
+                            <input type="text" value="5.00" data-max="5.0" data-min="#ratingMin" data-step="0.1"
+                                   data-fixed="2" id="ratingMax" autocomplete="off" />
+                        </label>
+                        <div class="clear-both"></div>
+                    </div>
+                    <div class="clear-both"></div>
                 </div>
-                <div class="radio-group">
-                    <div class="input-control-btn radio-all" data-group="type" data-selected="true">
-                        ALL
+                <div class="search-input">
+                    <div class="search-title">
+                        <small>(最多三项)</small>
+                        电影类型
                     </div>
-                    <div class="input-control-btn" data-group="type">
-                        Adventure
+                    <div class="radio-group">
+                        <div class="input-control-btn radio-all" data-group="type" data-selected="true">
+                            ALL
+                        </div>
+                        <div class="input-control-btn" data-group="type">
+                            Adventure
+                        </div>
+                    </div>
+                    <div class="radio-group">
+                        <div class="input-control-btn" data-group="type">
+                            Love
+                        </div>
+                        <div class="input-control-btn" data-group="type">
+                            Romance
+                        </div>
+                    </div>
+                    <div class="radio-group">
+                        <div class="input-control-btn" data-group="type">
+                            Animation
+                        </div>
+                        <div class="input-control-btn" data-disable="true">
+                            Children
+                        </div>
                     </div>
                 </div>
-                <div class="radio-group">
-                    <div class="input-control-btn" data-group="type">
-                        Love
-                    </div>
-                    <div class="input-control-btn" data-group="type">
-                        Romance
-                    </div>
-                </div>
-                <div class="radio-group">
-                    <div class="input-control-btn" data-group="type">
-                        Animation
-                    </div>
-                    <div class="input-control-btn" data-disable="true">
-                        Children
+                <div class="search-input">
+                    <div class="search-title">电影名称</div>
+                    <div class="text-input">
+                        <input type="text" placeholder="输入关键字" />
                     </div>
                 </div>
             </div>
-            <div class="search-input">
-                <div class="search-title">电影名称</div>
-                <div class="text-input">
-                    <input type="text" placeholder="输入关键字"/>
+            <div class="search-submit">
+                <div class="sub-title">搜索符合电影</div>
+                <div class="sub-commit">
+                    <img src="CoreAssets/Images/ok-white.png" height="50" width="50" />
+                </div>
+                <div class="sub-cancel searchClose">
+                    <img src="CoreAssets/Images/cancel-white.png" height="50" width="50" />
                 </div>
             </div>
         </div>
-        <div class="search-submit">
-            <div class="sub-title">搜索符合电影</div>
-            <div class="sub-commit">
-                <img src="CoreAssets/Images/ok-white.png" height="50" width="50"/>
-            </div>
-            <div class="sub-cancel searchClose">
-                <img src="CoreAssets/Images/cancel-white.png" height="50" width="50"/>
-            </div>
+    </div>
+    <!-- END searchDialog -->
+    <!-- Templates -->
+    <div id="templates" style="display: none;">
+        <div class="legend-item">
+            <div class="legend-item-color" style="background: white;"></div>
+            <div class="legend-item-title">Gender</div>
+            <div class="clear-both"></div>
         </div>
     </div>
-</div>
-<!-- END searchDialog -->
-<!-- Templates -->
-<div id="templates" style="display: none;">
-    <div class="legend-item">
-        <div class="legend-item-color" style="background: white;"></div>
-        <div class="legend-item-title">Gender</div>
-        <div class="clear-both"></div>
-    </div>
-</div>
-<!-- END Templates -->
-<!-- Audios -->
-<audio src="CoreAssets/Raw/click.mp3" id="sound-click" style="display: none;" preload="auto"></audio>
-<audio src="CoreAssets/Raw/hover.mp3" id="sound-hover" style="display: none;" preload="auto"></audio>
-<audio src="CoreAssets/Raw/hover2.mp3" id="sound-hover2" style="display: none;" preload="auto"></audio>
-<audio src="CoreAssets/Raw/hover3.mp3" id="sound-hover3" style="display: none;" preload="auto"></audio>
-<audio src="CoreAssets/Raw/loading.mp3" id="sound-loading" style="display: none;" preload="auto"></audio>
-<audio src="CoreAssets/Raw/notification.mp3" id="sound-notification" style="display: none;" preload="auto"></audio>
-<!-- END Audios -->
-<!-- Page JS Files -->
-<script src="CoreAssets/Js/core.js"></script>
-<script src="CoreAssets/Js/mt-chart.js"></script>
-<script src="CoreAssets/Js/md-chart.js"></script>
-<script src="CoreAssets/Js/leader.js"></script>
-<!-- END Page  JS Files -->
+    <!-- END Templates -->
+    <!-- Audios -->
+    <audio src="CoreAssets/Raw/click.mp3" id="sound-click" style="display: none;" preload="auto"></audio>
+    <audio src="CoreAssets/Raw/hover.mp3" id="sound-hover" style="display: none;" preload="auto"></audio>
+    <audio src="CoreAssets/Raw/hover2.mp3" id="sound-hover2" style="display: none;" preload="auto"></audio>
+    <audio src="CoreAssets/Raw/hover3.mp3" id="sound-hover3" style="display: none;" preload="auto"></audio>
+    <audio src="CoreAssets/Raw/loading.mp3" id="sound-loading" style="display: none;" preload="auto"></audio>
+    <audio src="CoreAssets/Raw/notification.mp3" id="sound-notification" style="display: none;" preload="auto"></audio>
+    <!-- END Audios -->
+    <!-- Page JS Files -->
+    <script src="CoreAssets/Js/core.js"></script>
+    <script src="CoreAssets/Js/mt-chart.js"></script>
+    <script src="CoreAssets/Js/md-chart.js"></script>
+    <script src="CoreAssets/Js/leader.js"></script>
+    <!-- END Page  JS Files -->
 </body>
 </html>
