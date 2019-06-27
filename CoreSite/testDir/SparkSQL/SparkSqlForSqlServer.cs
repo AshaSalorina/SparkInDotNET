@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.Spark;
+using Microsoft.Spark.Sql.Streaming;
 using Microsoft.Spark.Sql;
 using static Microsoft.Spark.Sql.Functions;
 
@@ -93,6 +93,13 @@ namespace CoreSite.testDir.SparkSQL
 
         public static async Task StreamingRead(SparkSession sparkSession)
         {
+            await Task.Run(() =>
+            {
+                sparkSession.ReadStream()
+                .Option("", "")
+                .Text("file://testFiles/*")
+                .Show();
+            });
         }
     }
 }
