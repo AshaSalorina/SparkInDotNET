@@ -18,8 +18,9 @@ namespace CoreSite
             #region Test
 
             var spark = SparkSession.Builder().GetOrCreate();
+
             _ = testDir.SparkSQL.SparkSqlForSqlServer.ReadData(spark);
-            testDir.testDataFrame.dataFrame.Show();
+            //testDir.testDataFrame.dataFrame.Show();
 
             #endregion Test
 

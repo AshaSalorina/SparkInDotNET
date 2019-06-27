@@ -12,21 +12,33 @@ namespace CoreSite.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        public class TtData
+        {
+            public string Ttuser { get; set; }
+            public string Ttmsg { get; set; }
+
+            public TtData(string a, string b)
+            {
+                Ttuser = a;
+                Ttmsg = b;
+            }
+        }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<TtData>> Get()
         {
             if (testDir.testDataFrame.dataFrame == null)
             {
                 return NotFound();
             }
-            var rstr = new List<string>();
+            var rstr = new List<TtData>();
 
-            var dFEnume = testDir.testDataFrame.dataFrame.Columns().GetEnumerator();
+            var rstr2 = testDir.testDataFrame.dataFrame.Collect().ToList();
 
-            while (dFEnume.MoveNext())
+            foreach (var item in rstr2)
             {
-                rstr.Add(dFEnume.Current);
+                rstr.Add(new TtData(item.Get(0).ToString(), item.Get(1).ToString()));
             }
             return rstr;
             //return NotFound();

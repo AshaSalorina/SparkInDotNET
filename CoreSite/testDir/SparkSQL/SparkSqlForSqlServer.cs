@@ -24,6 +24,7 @@ namespace CoreSite.testDir.SparkSQL
                   .Option("user", "spark")
                   .Option("password", "aspcore")
                   .Load();
+                testDir.testDataFrame.dataFrame.Show();
             });
         }
     }

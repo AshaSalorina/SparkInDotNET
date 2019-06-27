@@ -1,3 +1,5 @@
-#用于忽略bin和obj等生成目录
+#用于忽略bin和obj等生成目录和vs的工程目录
 bin/
 obj/
+.vs/
+*.sln
