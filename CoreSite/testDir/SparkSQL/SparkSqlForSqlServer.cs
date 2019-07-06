@@ -31,14 +31,35 @@ namespace CoreSite.testDir.SparkSQL
                     .Option("url", "jdbc:sqlserver://127.0.0.1:1433")
                     .Option("databaseName", "sparkDB")
                     .Option("driver", "com.microsoft.sqlserver.jdbc.SQLServerDriver")
-                    .Option("dbtable", "TestTable")
+                    .Option("dbtable", "ratings")
                     .Option("user", "spark")
                     .Option("password", "aspcore")
                     .Load();
-
+                //sparkSession.Read().Format("jdbc")
+                //  .Option("url", "jdbc:sqlserver://127.0.0.1:1433")
+                //  .Option("databaseName", "sparkDB")
+                //  .Option("driver", "com.microsoft.sqlserver.jdbc.SQLServerDriver")
+                //  .Option("dbtable", "users")
+                //  .Option("user", "spark")
+                //  .Option("password", "aspcore")
+                //  .Load()
+                //  .CreateOrReplaceTempView("users");
                 df = testDataFrame.dataFrame;
 
                 #endregion 读取
+
+                df.CreateTempView("mv");
+                Console.WriteLine("开始查询");
+
+                //sparkSession.Sql("select title from movies where title like '%ss%'").Show();
+
+                sparkSession.Sql("select from_unixtime(timestamp, 'yyyy-MM-dd') as stamp ,movieId,Avg(rating) from mv group by from_unixtime(timestamp, 'yyyy-MM-dd'),movieId having movieId = 1441 order by stamp desc").CreateTempView("TestTable");
+                //失败sparkSession.Sql("insert into table TestTable  VALUES(2019-1-1, 1442, 5)").Show();
+
+                //Modles.SparkData.Spark.Sql("select `Zip-code` , Sum(rating)/Count(rating) as rating  from users,ratings  where users.UserID = ratings.userId  Group by `Zip-code` Order by rating desc");
+
+                Console.WriteLine("查询完成");
+                //df.Select().GroupBy("").Agg(Avg(df["rating"])).Write();
 
                 #region 创建局部临时表并访问
 
@@ -60,6 +81,8 @@ namespace CoreSite.testDir.SparkSQL
 
                 #endregion 创建全局临时表并访问
 
+                /*
+
                 #region ShowTest
 
                 //直接利用df输出
@@ -79,6 +102,8 @@ namespace CoreSite.testDir.SparkSQL
                 Console.WriteLine("混合select和like筛选同时输出");
 
                 #endregion ShowTest
+
+                */
 
                 #region 写入
 
@@ -102,19 +127,21 @@ namespace CoreSite.testDir.SparkSQL
             await Task.Run(() =>
             {
                 tsRSDF = sparkSession.ReadStream()
-                .Option("sep", ",")
-                .Option("header", "true")
-                .Schema("userId integer, movieId integer, rating double, timestamp string")
+                .Option("sep", ";")
+                //.Option("header", "true")
+                .Schema("ttuser string, ttmessage string, ttage integer")
+                //.Schema("userId integer, movieId integer, rating double, timestamp string")
                 .Csv("file:///mnt/e/OneDrive/WorkingSpace/TestDir/ReadStreamTest/input/");
 
                 //文本或者网页->Sql server -> 流读入Sql，运行以下计算后再次推送至临时表
                 tsRSDF
-                    .GroupBy(tsRSDF["movieId"])
-                    .Agg((Sum(tsRSDF["rating"]) / Count(tsRSDF["rating"])).As("rating")
-                        , Count(tsRSDF["rating"]).As("num"))
-                    .WriteStream()
-                    .OutputMode("complete")
-                    .Format("console")
+                    .WriteStream().Format("jdbc")
+                    .Option("url", "jdbc:sqlserver://127.0.0.1:1433")
+                    .Option("databaseName", "sparkDB")
+                    .Option("driver", "com.microsoft.sqlserver.jdbc.SQLServerDriver")
+                    .Option("dbtable", "TestTable")
+                    .Option("user", "spark")
+                    .Option("password", "aspcore")
                     .Start()
                     .AwaitTermination();
             });

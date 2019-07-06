@@ -11,15 +11,12 @@ namespace CoreSite.SparkSql
     {
         public static async Task UpdateDataFromDB()
         {
-            await Task.Run(() =>
+            while (true)
             {
-                while (true)
-                {
-                    Modles.SparkData.Sata = Update();
-                    //10 minutes to update data
-                    Task.Delay(TimeSpan.FromHours(24));
-                }
-            });
+                Modles.SparkData.Sata = Update();
+                //10 minutes to update data
+                await Task.Delay(TimeSpan.FromHours(24));
+            }
         }
 
         private static bool Update()
@@ -75,25 +72,40 @@ namespace CoreSite.SparkSql
                 Console.WriteLine("Log:Users is loaded");
 
                 //create  MoviesRatings like "movieId,rating"
-                Modles.SparkData.Spark.Sql("select movieId,sum(rating)/Count(rating) as 'rating' from ratings group by movieId").CreateOrReplaceGlobalTempView("MoviesRatings");
+                Modles.SparkData.Spark.Sql("select movieId, sum(rating)/Count(rating) as `rating` ,Count(rating) as `numb` from global_temp.ratings group by movieId").CreateOrReplaceGlobalTempView("MoviesRatings");
 
                 //convert to dic
-                Modles.SparkData.MoviesRating = Modles.SparkData.Spark.Table("global_temp.MoviesRatings").Collect().ToDictionary(i => int.Parse(i[0].ToString()), i => double.Parse(i[1].ToString()));
+                Modles.SparkData.MoviesRating = Modles.SparkData.Spark.Table("global_temp.MoviesRatings").Collect().ToDictionary(
+                    i => int.Parse(i[0].ToString()),
+                    i => new Modles.SparkData.Rating()
+                    {
+                        Numb = int.Parse(i[2].ToString()),
+                        Ratings = double.Parse(i[1].ToString())
+                    }
+                    );
 
                 Console.WriteLine("Log:MoviesRating is calculated");
 
                 //create SexRatings like "Gender,rating"
-                Modles.SparkData.Spark.Sql("select Gender,Sum(rating)/Count(rating) as 'rating' from users, ratings where users.UserID = ratings.userId group by Gender").CreateOrReplaceGlobalTempView("SexRatings");
+                Modles.SparkData.Spark.Sql("select Gender, Sum(rating)/Count(rating) as `rating` from global_temp.users, global_temp.ratings where global_temp.users.UserID = global_temp.ratings.userId group by Gender").CreateOrReplaceGlobalTempView("SexRatings");
 
                 Console.WriteLine("Log:SexRating is calculated");
 
                 //create JobRatings like "occupation,rating"
                 //已排序
-                Modles.SparkData.Spark.Sql("select Occupation, Sum(rating)/Count(rating) as 'rating' from users,ratings where users.UserID = ratings.userId Group by Occupation Order by 'rating' desc").CreateOrReplaceGlobalTempView("JobRatings");
+                Modles.SparkData.Spark.Sql("select Occupation, Sum(rating)/Count(rating) as `rating` from global_temp.users,global_temp.ratings where global_temp.users.UserID = global_temp.ratings.userId Group by Occupation Order by rating desc").CreateOrReplaceGlobalTempView("JobRatings");
                 //convert to dic
                 Modles.SparkData.JobRating = Modles.SparkData.Spark.Table("global_temp.JobRatings").Collect().ToDictionary(i => i[0].ToString(), i => double.Parse(i[1].ToString()));
 
                 Console.WriteLine("Log:JobRating is calculated and sorted");
+
+                //create AreaRatings like "zip-code,rating"
+                //已排序和截取
+                Modles.SparkData.Spark.Sql("select `Zip-code` , Sum(rating)/Count(rating) as rating  from global_temp.users,global_temp.ratings  where global_temp.users.UserID = global_temp.ratings.userId  Group by `Zip-code` Order by rating desc").CreateOrReplaceGlobalTempView("AreaRatings");
+                //convert to dic
+                Modles.SparkData.AreaRating = Modles.SparkData.Spark.Table("global_temp.AreaRatings").Collect().ToDictionary(i => i[0].ToString(), i => double.Parse(i[1].ToString()));
+
+                Console.WriteLine("Log:AreaRating is calculated and sorted");
 
                 Console.WriteLine("Log:Now Update TypeRating");
                 UpdateTypeRating();
@@ -137,7 +149,7 @@ namespace CoreSite.SparkSql
                 //avg for each type ratingas
                 foreach (var item2 in item.Value)
                 {
-                    sum += Modles.SparkData.MoviesRating[item2];
+                    sum += Modles.SparkData.MoviesRating[item2].Ratings;
                 }
                 sum /= item.Value.Count;
                 //into dic
@@ -150,13 +162,6 @@ namespace CoreSite.SparkSql
                     Modles.SparkData.TypeRating.Add(item.Key, sum);
                 }
             }
-        }
-
-        /// <summary>
-        /// 更新Occu表单
-        /// </summary>
-        private static void UpdateOccuRating()
-        {
         }
     }
 }

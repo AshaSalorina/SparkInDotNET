@@ -15,18 +15,20 @@ namespace CoreSite
     {
         public static void Main(string[] args)
         {
+            //Create Spark Session
+            Modles.SparkData.Spark = SparkSession.Builder().GetOrCreate();
+
             #region Test
 
             //_ = testDir.SparkSQL.SparkSqlForSqlServer.StreamingRead(Modles.SparkData.Spark);
             //_ = testDir.Jobs.TestTaskDly.Start(Modles.SparkData.Spark);
             //_ = testDir.SparkSQL.SparkSqlForSqlServer.StreamingDeal(spark);
-            //_ = testDir.SparkSQL.SparkSqlForSqlServer.ReadData(spark);
+            //_ = testDir.SparkSQL.SparkSqlForSqlServer.ReadData(Modles.SparkData.Spark);
             //testDir.testDataFrame.dataFrame;
 
             #endregion Test
 
-            //Create Spark Session
-            Modles.SparkData.Spark = SparkSession.Builder().GetOrCreate();
+            _ = SparkSql.SparkSqlForSqlServer.UpdateDataFromDB();
 
             CreateWebHostBuilder(args).Build().Run();
         }

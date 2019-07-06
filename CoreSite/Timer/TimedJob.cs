@@ -7,5 +7,7 @@ namespace CoreSite.Timer
 {
     public class TimedJob
     {
+        //todo:可定制式的计划任务，用字典管理
+        //now:先实现手动添加
     }
 }

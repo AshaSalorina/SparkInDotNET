@@ -15,7 +15,15 @@ namespace CoreSite.Modles
         public static DataFrame Users { get; set; }
         public static DataFrame Ratings { get; set; }
 
-        public static Dictionary<int, double> MoviesRating = new Dictionary<int, double>();
+        public class Rating
+        {
+            public int Numb { get; set; }
+            public double Ratings { get; set; }
+        }
+
+        public static Dictionary<int, Rating> MoviesRating = new Dictionary<int, Rating>();
         public static Dictionary<string, double> TypeRating = new Dictionary<string, double>();
+        public static Dictionary<string, double> JobRating = new Dictionary<string, double>();
+        public static Dictionary<string, double> AreaRating = new Dictionary<string, double>();
     }
 }
