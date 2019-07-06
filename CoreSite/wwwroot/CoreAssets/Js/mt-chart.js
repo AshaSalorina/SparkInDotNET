@@ -86,6 +86,7 @@ var typeChart = (function () {
      */
     function createLenged(name, color) {
         var lenged = legendElem.cloneNode(true);
+        console.log(lenged);
         $(lenged).find('.legend-item-color')[0].style.backgroundColor = color;
         $(lenged).find('.legend-item-title')[0].innerHTML = name;
     }
@@ -128,11 +129,16 @@ var typeChart = (function () {
         mtChartTypeOption.legend.data = [];
         mtChartTypeOption.grid.height = '100%';
         mtChartTypeOption.series = [];
+
+        console.log("================创建图表标识对象==================");
         for (var i = 0; i < dataSet.length; i++) {
             mtChartTypeOption.series.push(generateData(dataSet[i].name, typeColors[i], [dataSet[i].rating]));
+            console.log("name:" +dataSet[i].name + " color:" + typeColors[i]+" obj:");
+            console.log(createLenged(dataSet[i].name, typeColors[i]));
             $(mtChart.type.legend).append(createLenged(dataSet[i].name, typeColors[i]));
             mtChartTypeOption.legend.data.push(dataSet[i].name);
         }
+        console.log("===================创建完成==================");
         mtChart.type.elem.setOption(mtChartTypeOption);
     };
     /**
