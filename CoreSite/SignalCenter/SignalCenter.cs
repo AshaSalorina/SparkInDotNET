@@ -197,6 +197,22 @@ namespace CoreSite.SignalCenter
 
             #endregion SetType
 
+            #region SetJobRating
+
+            var jrList = Modles.SparkData.JobRating.ToList();
+            jrList.Sort((v1, v2) =>
+            {
+                return -v1.Value.CompareTo(v2.Value);
+            });
+            _flag = 0;
+            foreach (var item in jrList.Take(5))
+            {
+                remsg.ratings.occupation[_flag].name = item.Key;
+                remsg.ratings.occupation[_flag++].rating = item.Value;
+            }
+
+            #endregion SetJobRating
+
             await Clients.Caller.SendAsync("GetAllAvgRatings", "200", "成功", remsg);
         }
 

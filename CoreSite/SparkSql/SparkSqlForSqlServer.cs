@@ -40,6 +40,8 @@ namespace CoreSite.SparkSql
 
                 #endregion Movies
 
+                Console.WriteLine("Log:Movies is loaded");
+
                 #region Ratings
 
                 Modles.SparkData.Ratings = Modles.SparkData.Spark.Read().Format("jdbc")
@@ -53,6 +55,8 @@ namespace CoreSite.SparkSql
                 Modles.SparkData.Ratings.CreateOrReplaceGlobalTempView("ratings");
 
                 #endregion Ratings
+
+                Console.WriteLine("Log:Ratings is loaded");
 
                 #region Users
 
@@ -68,19 +72,34 @@ namespace CoreSite.SparkSql
 
                 #endregion Users
 
+                Console.WriteLine("Log:Users is loaded");
+
                 //create  MoviesRatings like "movieId,rating"
                 Modles.SparkData.Spark.Sql("select movieId,sum(rating)/Count(rating) as 'rating' from ratings group by movieId").CreateOrReplaceGlobalTempView("MoviesRatings");
-
-                //create SexRatings like "Gender,rating"
-                Modles.SparkData.Spark.Sql("select Gender,Sum(rating)/Count(rating) as 'rating' from users, ratings where users.UserID = ratings.userId group by Gender").CreateOrReplaceGlobalTempView("SexRatings");
-
-                //create
 
                 //convert to dic
                 Modles.SparkData.MoviesRating = Modles.SparkData.Spark.Table("global_temp.MoviesRatings").Collect().ToDictionary(i => int.Parse(i[0].ToString()), i => double.Parse(i[1].ToString()));
 
+                Console.WriteLine("Log:MoviesRating is calculated");
+
+                //create SexRatings like "Gender,rating"
+                Modles.SparkData.Spark.Sql("select Gender,Sum(rating)/Count(rating) as 'rating' from users, ratings where users.UserID = ratings.userId group by Gender").CreateOrReplaceGlobalTempView("SexRatings");
+
+                Console.WriteLine("Log:SexRating is calculated");
+
+                //create JobRatings like "occupation,rating"
+                //已排序
+                Modles.SparkData.Spark.Sql("select Occupation, Sum(rating)/Count(rating) as 'rating' from users,ratings where users.UserID = ratings.userId Group by Occupation Order by 'rating' desc").CreateOrReplaceGlobalTempView("JobRatings");
+                //convert to dic
+                Modles.SparkData.JobRating = Modles.SparkData.Spark.Table("global_temp.JobRatings").Collect().ToDictionary(i => i[0].ToString(), i => double.Parse(i[1].ToString()));
+
+                Console.WriteLine("Log:JobRating is calculated and sorted");
+
+                Console.WriteLine("Log:Now Update TypeRating");
                 UpdateTypeRating();
-                UpdateOccuRating();
+                Console.WriteLine("Log:TypeRating done");
+
+                Console.WriteLine("Log:[Succece]:All data are loaded");
             }
             catch (Exception e)
             {
