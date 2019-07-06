@@ -40,6 +40,18 @@
         var occupationRatings = ratingObj.ratings.occupation;
         var areaRatings = ratingObj.ratings.area;
         /**
+         * 格式化小数
+         * */
+        for (var i = 0; i < typeRatings.length; i++) {
+            typeRatings[i].rating = typeRatings[i].rating.toFixed(2);
+        }
+        for (var i = 0; i < occupationRatings.length; i++) {
+            occupationRatings[i].rating = occupationRatings[i].rating.toFixed(2);
+        }
+        for (var i = 0; i < areaRatings.length; i++) {
+            areaRatings[i].rating = areaRatings[i].rating.toFixed(2);
+        }
+        /**
          * 初始化全部图表
          */
         typeChart.initGender(genderRatings);

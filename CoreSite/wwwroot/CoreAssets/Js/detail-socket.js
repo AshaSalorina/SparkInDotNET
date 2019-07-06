@@ -35,10 +35,29 @@
      */
     var onMovieDataArrive = function (msg) {
         var movieObj = JSON.parse(msg);
+        /**
+          * 格式化小数
+          * */
+        for (var i = 0; i < movieObj.userRatingDetails.length; i++) {
+            movieObj.userRatingDetails[i].rating = movieObj.userRatingDetails[i].rating.toFixed(2);
+        }
+        for (var i = 0; i < movieObj.ratings.length; i++) {
+            movieObj.ratings[i].rating = movieObj.ratings[i].rating.toFixed(2);
+        }
         movieDetailController.initMovie(movieObj);
     };
     var onUpdateDataArrive = function (msg) {
         var movieObj = JSON.parse(msg);
+        /**
+         * 格式化小数
+         * */
+        for (var i = 0; i < movieObj.userRatingDetails.length; i++) {
+            movieObj.userRatingDetails[i].rating = movieObj.userRatingDetails[i].rating.toFixed(2);
+        }
+        for (var i = 0; i < movieObj.ratings.length; i++) {
+            movieObj.ratings[i].rating = movieObj.ratings[i].rating.toFixed(2);
+        }
+
         movieDetailController.addMovieRatings(movieObj);
     };
     /**

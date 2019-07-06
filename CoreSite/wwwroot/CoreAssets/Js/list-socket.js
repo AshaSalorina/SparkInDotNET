@@ -55,6 +55,13 @@ var movieSocketSender = (function () {
     var onMovieList = function (msg) {
         var ratingObj = JSON.parse(msg);
         movieController.loadLock = false;
+        /**
+        * 格式化小数
+        * */
+        for (var i = 0; i < ratingObj.movieList.length; i++) {
+            ratingObj.movieList[i].rating = ratingObj.movieList[i].rating.toFixed(2);
+        }
+  
         movieController.setFilmData(ratingObj.movieList);
         movieController.loadPage();
     };
