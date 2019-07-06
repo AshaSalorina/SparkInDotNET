@@ -21,9 +21,9 @@ var movieSocketSender = (function () {
      * 初始化请求发送
      */
     var senderObj = {};
-    var searchAttr = sessionStorage.getItem("searchAttr");
-    if (searchAttr === null) {
-        searchAttr = {
+    senderObj.searchAttr = sessionStorage.getItem("searchAttr");
+    if (senderObj.searchAttr === null) {
+        senderObj.searchAttr = {
             "typeSelectList": [],
             "ratingMin": 0.00,
             "ratingMax": 5.00,
@@ -33,12 +33,17 @@ var movieSocketSender = (function () {
 
     senderObj.sendPageRequest = function () {
         var message = {
-            "ratingRage": [searchAttr.ratingMin, searchAttr.ratingMax],
-            "movieType": searchAttr.typeSelectList,
-            "movieKeyName": searchAttr.searchKeywords,
+            "ratingRage": [senderObj.searchAttr.ratingMin, senderObj.searchAttr.ratingMax],
+            "movieType": senderObj.searchAttr.typeSelectList,
+            "movieKeyName": senderObj.searchAttr.searchKeywords,
             "pageNo": movieController.pageNo++,
             "pageSize": 4
         };
+        console.log("==============搜索参数=============");
+        console.log(senderObj.searchAttr);
+        console.log(message);
+        console.log(senderObj.searchAttr);
+        console.log("===================================");
         socketController.invoke("getMovieList", message);
     };
 
