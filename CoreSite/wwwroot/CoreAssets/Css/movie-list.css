@@ -1,0 +1,164 @@
+/* moviesList */
+#moviesList {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.movies-container {
+    height: 21vw;
+}
+
+.movies-container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.movie-item {
+    float: left;
+    width: 13vw;
+    height: 19.5vw;
+    margin: 1.5vw 2vw;
+    box-shadow: 15px 17px 18px rgba(22, 22, 22, .4);
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform .5s ease-in-out;
+}
+.movie-item:hover{
+    transform: scale(1.1);
+    transition: transform .5s ease-in-out;
+}
+.movie-item .movie-bg {
+    width: 100%;
+    height: 100%;
+    border-radius: .5vw;
+    pointer-events: none;
+    user-select: none;
+}
+
+.movie-item .movie-info {
+    position: absolute;
+    width: 13vw;
+    margin-top: 11vw;
+    height: 8.5vw;
+    background: rgba(13, 31, 51, 0.76);
+    z-index: 500;
+    border-radius: 0 0 0 .5vw;
+    transition: background-color .5s ease-in-out;
+    overflow: hidden;
+}
+
+.movie-item:hover .movie-info {
+    background: rgba(44, 55, 77, 0.76);
+}
+
+.movie-item .movie-info .movie-title {
+    color: #fff;
+    font-size: 1.4vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 13vw;
+    height: 2.4vw;
+    line-height: 2.4vw;
+    text-align: right;
+    padding: .5vw 1vw 0 .5vw;
+}
+
+.movie-item .movie-info .movie-era {
+    color: #b7b7b7;
+    font-size: .8vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 13vw;
+    height: 1.4vw;
+    line-height: 1.4vw;
+    text-align: right;
+    padding: 0 1.4vw;
+    margin-top: -0.25vw;
+}
+
+.movie-item .movie-info .rating-container {
+    position: absolute;
+    width: 3vw;
+    height: 3vw;
+    margin: .6vw 0 0 1.2vw;
+}
+
+.movie-item .movie-info .movie-type-tags {
+    position: absolute;
+    width: 7.6vw;
+    height: 2.9vw;
+    margin: .2vw 0 0 5vw;
+}
+
+.movie-item .movie-info .movie-type-tags:after {
+    content: "";
+    clear: both;
+}
+
+.movie-type-tags .movie-tag {
+    color: #ffffff;
+    font-size: .7vw;
+    width: auto;
+    height: 1.15vw;
+    line-height: 1.15vw;
+    float: left;
+    max-width: 3.5vw;
+    text-align: center;
+    overflow: hidden;
+    padding: 0 .2vw;
+    background-color: rgba(166, 166, 166, 0.68);
+    margin: .1vw .1vw;
+    border-radius: .2vw;
+}
+
+.movie-item .movie-info .movie-read-more {
+    position: absolute;
+    color: #f6f6f6;
+    height: .7vw;
+    margin: 3.3vw 0 0 7.7vw;
+    font-size: .7vw;
+}
+
+/**
+ * 载入动画
+ */
+.movie-item:nth-child(1n) {
+    animation: movieItemEntranceAnimate 1s;
+}
+
+.movie-item:nth-child(2n) {
+    animation: movieItemEntranceAnimate 1s;
+    animation-delay: .15s;
+    animation-fill-mode: backwards;
+}
+
+.movie-item:nth-child(3n) {
+    animation: movieItemEntranceAnimate 1s;
+    animation-delay: .3s;
+    animation-fill-mode: backwards;
+}
+
+.movie-item:nth-child(4n) {
+    animation: movieItemEntranceAnimate 1s;
+    animation-delay: .45s;
+    animation-fill-mode: backwards;
+}
+
+@keyframes movieItemEntranceAnimate {
+    0% {
+        opacity: 0;
+        transform: scale(1.2) translateX(8vw);
+        box-shadow: 45px 47px 40px rgba(22, 22, 22, .4);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateX(0);
+        box-shadow: 15px 17px 18px rgba(22, 22, 22, .4);
+    }
+}
+
+/* end moviesList */

@@ -1,0 +1,277 @@
+/** 重新定义拖动条 */
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #dedede;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #dedede;
+}
+
+/**
+  * 电影海报
+ */
+.movie-poster {
+    position: absolute;
+    width: 14.6vw;
+    height: 22vw;
+    z-index: 999;
+    background-color: #ffffff;
+    padding: .5vw;
+    border-radius: .5vw;
+    margin: 1.2vw 2vw;
+    box-shadow: 2px 2px 10px #999;
+}
+
+.movie-poster img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: .3vw;
+}
+
+.movie-info-container {
+    color: #333;
+    width: 100%;
+    height: 100%;
+    padding-left: 16.6vw;
+}
+
+.movie-info-container .movie-title {
+    box-sizing: content-box;
+    padding-top: 1.5vw;
+    padding-left: 2vw;
+    height: 2.5vw;
+    font-size: 2.3vw;
+    line-height: 2.5vw;
+}
+
+.movie-info-container .movie-title .movie-title-zh {
+    font-weight: bold;
+}
+
+.movie-info-container .movie-title .movie-title-era {
+    font-size: 2.12vw;
+}
+
+.movie-info-container .movie-title-en {
+    box-sizing: content-box;
+    padding-left: 2vw;
+    height: 2.5vw;
+    font-size: 1.63vw;
+    line-height: 2.5vw;
+}
+
+.movie-info-container .movie-tags {
+    box-sizing: content-box;
+    background: #444;
+    display: inline-block;
+    *display: inline;
+    color: #fff;
+    font-size: 1.1vw;
+    line-height: 1.7vw;
+    margin-top: .2vw;
+    margin-left: 2vw;
+    padding: 0 .75vw;
+    border-radius: .2vw;
+    position: relative;
+    zoom: 1;
+}
+
+.movie-info-container .movie-rating {
+    position: absolute;
+    width: 5vw;
+    height: 5vw;
+    margin: 1.5vw 33vw;
+    z-index: 1001;
+}
+
+.movie-info-container .movie-data-info {
+    background-color: #127bab;
+    color: #ffffff;
+    height: 2.3vw;
+    line-height: 2.3vw;
+    font-size: 1vw;
+    padding-left: 2vw;
+    margin-top: 1vw;
+}
+
+.movie-info-container .movie-data-info span {
+    padding: 0 .3vw 0 1vw;
+    font-weight: bold;
+    font-size: 1.2vw;
+}
+
+.movie-info-container .movie-data-container {
+    background-color: #ffffff;
+    height: 11.5vw;
+    width: 100%;
+}
+
+.movie-info-container .movie-data-container:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.movie-rating-chart-container {
+    float: left;
+    width: 24vw;
+    height: 10.2vw;
+    margin: .5vw 0 0 2vw;
+}
+
+.movie-rating-chart {
+    width: 100%;
+    height: 100%;
+}
+
+.movie-describe-container {
+    float: left;
+    width: 13vw;
+    height: 10.2vw;
+    margin: .5vw 0 0 1vw;
+}
+
+.movie-describe-container .user-tags {
+    height: 4vw;
+}
+
+.movie-describe-container .user-tags .user-tags-title {
+    height: 1.4vw;
+    font-size: .9vw;
+    line-height: 1.4vw;
+    padding: 0 .5vw;
+    background-color: #f4f4f4;
+    color: #222;
+    border-bottom: 1px solid #e5e9f4;
+}
+
+.movie-describe-container .user-tags .user-tags-content {
+    height: 2.6vw;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.user-tags-content .user-tag {
+    height: 1.3vw;
+    line-height: 1.3vw;
+    font-size: .8vw;
+    padding: 0 .2vw 0 .4vw;
+}
+
+.user-tags-content .user-tag .user-name {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    width: 2.8vw;
+    height: 1.3vw;
+    line-height: 1.3vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-weight: bold;
+
+}
+
+.user-tags-content .user-tag .tag-content {
+    display: inline-block;
+    vertical-align: top;
+    width: 8.6vw;
+    height: 1.3vw;
+    line-height: 1.3vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.movie-describe-container .user-recent {
+    margin-top: .2vw;
+    height: 6vw;
+}
+
+.movie-describe-container .user-recent .user-recent-title {
+    height: 1.4vw;
+    font-size: .9vw;
+    line-height: 1.4vw;
+    padding: 0 .5vw;
+    background-color: #f4f4f4;
+    color: #222;
+    border-bottom: 1px solid #e5e9f4;
+}
+
+.movie-describe-container .user-recent .user-recent-content {
+    height: 4.6vw;
+}
+
+.user-recent-content .rating-title {
+    height: 1.3vw;
+    line-height: 1.3vw;
+    font-size: .8vw;
+}
+
+.user-recent-content .rating-title:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.user-recent-content .rating-title > div {
+    float: left;
+    color: #6d757a;
+}
+
+.user-recent-content .rating-title .user-name {
+    padding-left: .4vw;
+    width: 4.8vw;
+}
+
+.user-recent-content .rating-title .rating-value {
+    padding-left: .2vw;
+    width: 2vw;
+}
+
+.user-recent-content .rating-title .rating-date {
+    padding-left: .4vw;
+    width: 5vw;
+}
+
+.user-recent-content .rating-list {
+    height: 3.3vw;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.user-recent-content .rating-list ul li {
+    text-decoration: none;
+}
+
+.rating-list span {
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    height: 1vw;
+    line-height: 1vw;
+    font-size: .8vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.rating-list .user-name {
+    padding-left: .4vw;
+    width: 4.8vw;
+    color: #6d757a;
+}
+
+.rating-list .rating-value {
+    width: 2vw;
+    color: #222;
+    font-weight: bold;
+}
+
+.rating-list .rating-date {
+    width: 5vw;
+    font-size: .4vw;
+    color: #6d757a;
+}

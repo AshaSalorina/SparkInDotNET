@@ -1,0 +1,101 @@
+/**
+ * Inspiration for this project found at:
+ * https://markus.oberlehner.net/blog/pure-css-animated-svg-circle-chart
+ * 1. The `reverse` animation direction plays the animation backwards
+ *    which makes it start at the stroke offset 100 which means displaying
+ *    no stroke at all and animating it to the value defined in the SVG
+ *    via the inline `stroke-dashoffset` attribute.
+ * 2. Rotate by -90 degree to make the starting point of the
+ *    stroke the top of the circle.
+ * 3. Using CSS transforms on SVG elements is not supported by Internet Explorer
+ *    and Edge, use the transform attribute directly on the SVG element as a
+ * .  workaround.
+ */
+
+.circle-chart {
+    width: 100%;
+    height: 100%;
+}
+
+.circle-chart__circle {
+    stroke-width: 3;
+    stroke-linecap: square;
+    fill: none;
+    animation: circle-chart-fill 2s reverse; /* 1 */
+    transform: rotate(-90deg); /* 2, 3 */
+    transform-origin: center; /* 4 */
+}
+
+.circle-chart__background {
+    stroke: rgba(239, 239, 239, 0.4);
+    stroke-width: 3;
+    fill: none;
+}
+
+.circle-chart-dark .circle-chart__background {
+    stroke: rgba(122, 122, 122, 0.6);
+    fill: rgba(68, 68, 68, 0.90);
+}
+
+/**
+ * 1. Rotate by -90 degree to make the starting point of the
+ *    stroke the top of the circle.
+ * 2. Scaling mirrors the circle to make the stroke move right
+ *    to mark a positive chart value.
+ * 3. Using CSS transforms on SVG elements is not supported by Internet Explorer
+ *    and Edge, use the transform attribute directly on the SVG element as a
+ * .  workaround.
+ */
+
+.circle-chart__circle--negative {
+    transform: rotate(-90deg) scale(1, -1); /* 1, 2, 3 */
+}
+
+.circle-chart__info {
+    animation: circle-chart-appear 2s forwards;
+    opacity: 0;
+    transform: translateY(0.3em);
+}
+
+.circle-chart__percent {
+    fill: #ffffff;
+    alignment-baseline: central;
+    text-anchor: middle;
+    font-size: .8vw;
+}
+
+.circle-chart__subline {
+    fill: #ffffff;
+    alignment-baseline: central;
+    text-anchor: middle;
+    font-size: .4vw;
+}
+
+.success-stroke {
+    stroke: #00acc1;
+}
+
+.normal-stroke {
+    stroke: #00C851;
+}
+
+.warning-stroke {
+    stroke: #ffbb33;
+}
+
+.danger-stroke {
+    stroke: #ff4444;
+}
+
+@keyframes circle-chart-fill {
+    to {
+        stroke-dasharray: 0, 100;
+    }
+}
+
+@keyframes circle-chart-appear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
