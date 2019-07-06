@@ -41,7 +41,7 @@ namespace CoreSite
 
             app.UseSignalR((routes) =>
             {
-                routes.MapHub<testDir.SignalCenter.HwSignalCenter>("/sparkMovie");
+                routes.MapHub<SignalCenter.SignalCenter>("/sparkMovie");
             });
 
             app.UseDefaultFiles("/index.html");
