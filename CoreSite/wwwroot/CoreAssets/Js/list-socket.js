@@ -62,12 +62,13 @@ var movieSocketSender = (function () {
         var ratingObj = JSON.parse(msg);
         movieController.loadLock = false;
         /**
-        * 格式化小数
+        * 格式化小数/类型列表
         * */
         for (var i = 0; i < ratingObj.movieList.length; i++) {
             ratingObj.movieList[i].rating = ratingObj.movieList[i].rating.toFixed(2);
+            ratingObj.movieList[i].movieType = ratingObj.movieList[i].movieType.split("|").join("/");
         }
-  
+ 
         movieController.setFilmData(ratingObj.movieList);
         movieController.loadPage();
     };

@@ -44,6 +44,7 @@
         for (var i = 0; i < movieObj.ratings.length; i++) {
             movieObj.ratings[i].rating = movieObj.ratings[i].rating.toFixed(2);
         }
+        movieObj.movieType = movieObj.movieType.split("|").join("/");
         movieDetailController.initMovie(movieObj);
     };
     var onUpdateDataArrive = function (msg) {
