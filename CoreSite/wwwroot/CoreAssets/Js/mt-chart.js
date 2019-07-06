@@ -135,38 +135,6 @@ var typeChart = (function () {
         }
         mtChart.type.elem.setOption(mtChartTypeOption);
     };
-    var testInit = (function () {
-        typeChartObj.initGender({
-            "men": 3.68,
-            "female": 4.22
-        });
-        typeChartObj.initType([
-            {
-                "name": "Adventure",
-                "rating": 5.0
-            },
-            {
-                "name": "Animation",
-                "rating": 4.6
-            },
-            {
-                "name": "Children",
-                "rating": 3.8
-            },
-            {
-                "name": "Comedy",
-                "rating": 3.6
-            },
-            {
-                "name": "Fantasy",
-                "rating": 2.1
-            },
-            {
-                "name": "Romance",
-                "rating": 2.8
-            }
-        ]);
-    })();
     /**
      * 刷新窗口大小的时候，重置图表大小
      */
