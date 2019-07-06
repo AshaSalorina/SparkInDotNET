@@ -34,7 +34,7 @@ var movieSocketSender = (function () {
     senderObj.sendPageRequest = function () {
         var message = {
             "ratingRage": [searchAttr.ratingMin, searchAttr.ratingMax],
-            "movieType": [searchAttr.typeSelectList],
+            "movieType": searchAttr.typeSelectList,
             "movieKeyName": searchAttr.searchKeywords,
             "pageNo": movieController.pageNo++,
             "pageSize": 4
