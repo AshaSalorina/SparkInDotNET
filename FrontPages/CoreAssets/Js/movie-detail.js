@@ -1,21 +1,18 @@
 $(function () {
-    var mChart = $(".movie-rating .circle-chart");
-    $(mChart).attr("data-percentage", parseInt(Math.random() * 50));
-    $(mChart).circlechart();
-
-    $.get("http://fanyi.youdao.com/translate", {
-        "doctype": "json",
-        "type": "AUTO",
-        "i": "Fate Stay Night"
-    }, function (res) {
-        var jsonObj = {
-            translateResult: [{"tgt": "暂无"}]
+    var commentPanel = $("#commentPanel");
+    $(".commentSubmit").click(function () {
+        var userId = $("#userCommentId");
+        var userRating = $("#userCommentRating");
+        var userTag = $("#userCommentContent");
+        var message = {
+            "name": userId,
+            "rating": parseFloat(userRating).toFixed(2),
+            "tag": userTag
         };
-        jsonObj = res;
-        var title = "暂无信息";
-        if(jsonObj.errorCode === 0){
-            title = jsonObj.translateResult[0][0].tgt;
-        }
-        $(".movie-title .movie-title-zh").html(title);
+        socketController.invoke("addUserComment", message);
+        $(commentPanel).removeClass("user-comment-panel-show");
+        $(commentPanel).addClass("user-comment-panel-hide");
+        rawPlayer.playSound("click");
+        alert("提交成功！");
     });
 });

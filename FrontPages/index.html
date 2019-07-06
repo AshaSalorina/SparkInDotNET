@@ -10,6 +10,9 @@
     <!-- JS Files -->
     <script src="CoreAssets/Js/jquery310.js"></script>
     <script src="CoreAssets/Js/echarts.js"></script>
+    <script src="http://pv.sohu.com/cityjson?ie=utf-8"></script>
+    <script src="CoreAssets/Js/signalr.min.js"></script>
+    <script src="CoreAssets/Js/search.js"></script>
     <!-- END JS Files -->
 </head>
 <body>
@@ -272,46 +275,22 @@
                 </div>
                 <div class="clear-both"></div>
             </div>
-            <div class="search-input">
+            <div class="search-input" id="searchTypeRadio">
                 <div class="search-title">
                     <small>(最多三项)</small>
                     电影类型
-                </div>
-                <div class="radio-group">
-                    <div class="input-control-btn radio-all" data-group="type" data-selected="true">
-                        ALL
-                    </div>
-                    <div class="input-control-btn" data-group="type">
-                        Adventure
-                    </div>
-                </div>
-                <div class="radio-group">
-                    <div class="input-control-btn" data-group="type">
-                        Love
-                    </div>
-                    <div class="input-control-btn" data-group="type">
-                        Romance
-                    </div>
-                </div>
-                <div class="radio-group">
-                    <div class="input-control-btn" data-group="type">
-                        Animation
-                    </div>
-                    <div class="input-control-btn" data-disable="true">
-                        Children
-                    </div>
                 </div>
             </div>
             <div class="search-input">
                 <div class="search-title">电影名称</div>
                 <div class="text-input">
-                    <input type="text" placeholder="输入关键字"/>
+                    <input id="searchKeywords" type="text" placeholder="输入关键字"/>
                 </div>
             </div>
         </div>
         <div class="search-submit">
             <div class="sub-title">搜索符合电影</div>
-            <div class="sub-commit">
+            <div class="sub-commit" id="searchSubmit">
                 <img src="CoreAssets/Images/ok-white.png" height="50" width="50"/>
             </div>
             <div class="sub-cancel searchClose">
@@ -343,6 +322,7 @@
 <script src="CoreAssets/Js/mt-chart.js"></script>
 <script src="CoreAssets/Js/md-chart.js"></script>
 <script src="CoreAssets/Js/leader.js"></script>
+<script src="CoreAssets/Js/index-socket.js"></script>
 <!-- END Page  JS Files -->
 </body>
 </html>

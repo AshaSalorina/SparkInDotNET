@@ -1,20 +1,16 @@
 /**
  * movie 每日数据图表初始化
  */
-(function () {
+/**
+ * 初始化配置
+ */
+
+var dailyChart = (function () {
+    var dailyChartObj = {};
     /**
-     * 初始化配置
+     * 初始化配置模板
      */
-    var datas =[];
-    var colors = [];
-    var counts = {};
-    /* 测试用的数据 */
-    function generateTestData() {
-        datas.forEach(function (value, i) {
-            counts[datas[i]] = i*0.5 + parseInt(Math.random() * 4);
-        });
-    }
-    var generateOption = function () {
+    var generateOption = function (datas, colors, ratings) {
         return {
             tooltip: {
                 trigger: 'item',
@@ -39,7 +35,7 @@
                     padding: [0, 0, 0, 10]
                 },
                 formatter: function (name) {
-                    return name + "  " + counts[name] + "分";
+                    return name + "  " + ratings[name] + "分";
                 }
             }, title: {
                 text: "今日",
@@ -83,48 +79,100 @@
                         }
                     },
                     data: [
-                        {value: counts[datas[0]], name: datas[0], itemStyle: {color: colors[0]}},
-                        {value: counts[datas[1]], name: datas[1], itemStyle: {color: colors[1]}},
-                        {value: counts[datas[2]], name: datas[2], itemStyle: {color: colors[2]}},
-                        {value: counts[datas[3]], name: datas[3], itemStyle: {color: colors[3]}},
-                        {value: counts[datas[4]], name: datas[4], itemStyle: {color: colors[4]}}
+                        {value: ratings[datas[0]], name: datas[0], itemStyle: {color: colors[0]}},
+                        {value: ratings[datas[1]], name: datas[1], itemStyle: {color: colors[1]}},
+                        {value: ratings[datas[2]], name: datas[2], itemStyle: {color: colors[2]}},
+                        {value: ratings[datas[3]], name: datas[3], itemStyle: {color: colors[3]}},
+                        {value: ratings[datas[4]], name: datas[4], itemStyle: {color: colors[4]}}
                     ]
                 }
             ]
         };
     };
     /**
-     * 渲染图表 - mdTodayInfo
+     * 初始化图表对象
      */
-    var mdOccupationInfo = document.getElementById('mdOccupationInfo');
-    datas = ['医生', '律师', '程序员', '服务员', '工程师'];
-    //生成测试数据
-    generateTestData();
-    colors = ['#00e4ff', '#51eac4', '#00ff7e', '#1efe3b', '#96ff00'];
-    var mdOccupationCharts = echarts.init(mdOccupationInfo);
-    var mdOccupationOption = generateOption();
-    mdOccupationOption.title.text = '职业';
-    mdOccupationOption.series[0].name = '职业平均分';
-    mdOccupationCharts.setOption(mdOccupationOption);
+    var mdChart = {
+        "occupation": {
+            "elem": echarts.init($('#mdOccupationInfo')[0])
+        },
+        "area": {
+            "elem": echarts.init($('#mdAreaInfo')[0])
+        }
+    };
     /**
-     * 渲染图表 - mdTodayInfo
+     * 图表初始化
      */
-    var mdAreaInfo = document.getElementById('mdAreaInfo');
-    datas = ['成都', '北京', '天津', '南京', '杭州'];
-    //生成测试数据
-    generateTestData();
-    colors = ['#04e0f9', '#0096ff', '#006cff', '#0041fb', '#4D18E8'];
-    var mdAreaCharts = echarts.init(mdAreaInfo);
-    var mdAreaOption = generateOption();
-    mdAreaOption.title.text = '地区';
-    mdAreaOption.series[0].name = '地区平均分';
-    mdAreaCharts.setOption(mdAreaOption);
-
+    dailyChartObj.initOccupation = function (dataSet) {
+        var colors = ['#00e4ff', '#51eac4', '#00ff7e', '#1efe3b', '#96ff00'];
+        var datas = [];
+        var ratings = {};
+        for (var i = 0; i < dataSet.length; i++) {
+            datas.push(dataSet[i].name);
+            ratings[datas[i]] = dataSet[i].rating;
+        }
+        var mdOccupationOption = generateOption(datas, colors, ratings);
+        mdOccupationOption.title.text = '职业';
+        mdOccupationOption.series[0].name = '职业平均分';
+        mdChart.occupation.elem.setOption(mdOccupationOption);
+    };
+    dailyChartObj.initArea = function (dataSet) {
+        var colors = ['#04e0f9', '#0096ff', '#006cff', '#0041fb', '#4D18E8'];
+        var datas = [];
+        var ratings = {};
+        for (var i = 0; i < dataSet.length; i++) {
+            datas.push(dataSet[i].name);
+            ratings[datas[i]] = dataSet[i].rating;
+        }
+        var mdAreaOption = generateOption(datas, colors, ratings);
+        mdAreaOption.title.text = '地区';
+        mdAreaOption.series[0].name = '地区平均分';
+        mdChart.area.elem.setOption(mdAreaOption);
+    };
+    var init = (function () {
+        dailyChartObj.initOccupation([
+            {
+                "name": "Doctor",
+                "rating": 3.25
+            }, {
+                "name": "Computer",
+                "rating": 2.25
+            }, {
+                "name": "Science",
+                "rating": 1.36
+            }, {
+                "name": "Cosmos",
+                "rating": 3.33
+            }, {
+                "name": "Dentist",
+                "rating": 4.55
+            }
+        ]);
+        dailyChartObj.initArea([
+            {
+                "name": "ChengDu",
+                "rating": 4.3
+            }, {
+                "name": "BeiJing",
+                "rating": 3.66
+            }, {
+                "name": "ShangHai",
+                "rating": 4.12
+            }, {
+                "name": "ShenZhen",
+                "rating": 3.21
+            }, {
+                "name": "HaiNan",
+                "rating": 2.55
+            }
+        ]);
+    })();
     /**
      * window重置分析
      */
     window.addEventListener("resize", () => {
-        mdOccupationCharts.resize();
-        mdAreaCharts.resize();
+        mdChart.area.elem.resize();
+        mdChart.area.elem.resize();
     });
+    return dailyChartObj;
 })();

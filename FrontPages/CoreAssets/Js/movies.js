@@ -9,6 +9,9 @@ var movieController = (function () {
      */
     movieControllerObj.loadLock = false;
     movieControllerObj.oldSLeft = 0;
+    movieControllerObj.filmData = null;
+    movieControllerObj.pageNo = 1;
+
     /**
      * 横向滚动
      */
@@ -45,7 +48,7 @@ var movieController = (function () {
             var itemW = $(mItem).width();  //一个电影元素宽度
             if (contentW - scroW - viewW < itemW) {
                 movieControllerObj.oldSLeft = scroW;
-                movieControllerObj.loadPage();
+                movieSocketSender.pageRequestSend();
             }
         });
     };
@@ -64,48 +67,46 @@ var movieController = (function () {
         if (movieControllerObj.loadLock) {
             return false;
         }
+        /*加异步锁*/
+        movieController.loadLock = true;
         var mContainer = $(".movies-container");
         var moviesList = $("#moviesList");
-        /*==========模拟载入数据===========*/
-        /*加异步锁*/
-        movieControllerObj.loadLock = true;
-        for (var i = 0; i < 4; i++) {
+        /* 初始化变量 */
+        for (var i = 0; i < movieControllerObj.filmData.length; i++) {
+            var filmDetail = movieControllerObj.filmData[i];
+            var filmNameSplit = filmDetail.movieName.split("(");
+            var filmName = filmNameSplit[0];
+            var filmYear = filmNameSplit[1].split(")")[0];
+            var filmId = filmDetail.movieId;
+            var filmRating = filmDetail.rating;
+            var filmType = filmDetail.movieType.split("/");
             var itemTemplate = $("#templates .movie-item").clone(true);
-            var imgs = ["Action", "Adventure", "Animation", "Children", "Children‘s",
-                "Comedy", "Crime", "Documentary", "Drama", "Fantasy", "Film-Noir",
-                "FilmNoir", "Horror", "Musical", "Mystery", "None", "Romance",
-                "Sci-Fi", "SciFi", "Thriller", "War", "Western"];
-            var rand = Math.random();
-            var randInt = parseInt(rand * imgs.length);
-            $(itemTemplate).find("img").attr("src", "CoreAssets/Images/Movies/" + imgs[randInt] + ".jpg");
-            $(itemTemplate).find(".circle-chart").attr("data-percentage", parseInt(Math.random() * 50));
+            $(itemTemplate).find("img").attr("src", "CoreAssets/Images/Movies/" + filmType[0] + ".jpg");
+            $(itemTemplate).find(".circle-chart").attr("data-percentage", parseInt(filmRating * 10));
             $(itemTemplate).find(".circle-chart").circlechart();
+            $(itemTemplate).find(".movie-title").html(filmName);
+            $(itemTemplate).find(".movie-era").html("(" + filmYear + ")");
             var movieTypeTags = $(itemTemplate).find(".movie-type-tags");
-            for (var j = 0; j < parseInt(Math.random() * 4) + 1; j++) {
+            for (var j = 0; j < filmType.length; j++) {
                 var movieTag = $("<div class=\"movie-tag\"></div>");
-                $(movieTag).html(imgs[parseInt(imgs.length * Math.random())]);
+                $(movieTag).html(filmType[j]);
                 $(movieTypeTags).append(movieTag);
             }
+            $(itemTemplate).attr("data-id", filmId);
+            $(itemTemplate).click(function () {
+                window.open("movieDetail.html?movieId=" + $(this).attr("data-id"));
+            });
             $(mContainer).append(itemTemplate);
         }
-        movieControllerObj.loadLock = false;
         movieControllerObj.resizeMovieContainer();
         $(moviesList).scrollLeft(movieControllerObj.oldSLeft);
-        /*==========模拟结束===========*/
     };
-
+    movieControllerObj.setFilmData = function (filmData) {
+        movieControllerObj.filmData = filmData;
+    };
     movieControllerObj.init = (function () {
         movieScrollListenerInit();
         wheelRollerListener();
     })();
     return movieControllerObj;
 })();
-
-/**
- * 初始化函数
- */
-$(function () {
-    var initMovieContainer = (function () {
-        movieController.loadPage();
-    })();
-});

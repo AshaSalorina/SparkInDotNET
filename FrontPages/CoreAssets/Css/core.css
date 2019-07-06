@@ -498,7 +498,7 @@ video {
 /* search-panel */
 .search-panel {
     position: fixed;
-    z-index: 999;
+    z-index: 1099;
     background-color: rgba(3, 8, 17, 0.6);
     width: 100%;
     height: 100%;
@@ -827,3 +827,160 @@ video {
 }
 
 /* END search-panel */
+/* user-comment-panel */
+.user-comment-panel {
+    position: fixed;
+    z-index: 1100;
+    background-color: rgba(3, 8, 17, 0.6);
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.user-comment-panel-hide {
+    display: none;
+}
+
+.user-comment-panel-show {
+    display: block;
+    animation: search-enter .5s ease-in;
+}
+
+.user-comment-panel-show .comment-start-animate {
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    opacity: 0;
+    transform: translateY(-50%) scale(0);
+    animation: search-light-enter .5s ease-in-out;
+    z-index: 1010;
+}
+
+.comment-start-animate img {
+    width: 100%;
+    height: 100%;
+}
+.comment-shadow-animate {
+    animation: searchShadowAnimate 5s infinite;
+}
+
+.comment-dialog {
+    position: absolute;
+    z-index: 1001;
+    width: 50vw;
+    height: 30vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.comment-dialog > img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1000;
+    pointer-events: none;
+    opacity: .9;
+}
+
+.comment-logo {
+    width: 10vw;
+    height: 12.5vw;
+    position: absolute;
+    z-index: 1002;
+    margin: 2.5vw 0 0 34.5vw;
+    opacity: .8;
+}
+
+.comment-logo img {
+    width: 100%;
+    height: 100%;
+}
+
+.comment-form {
+    position: absolute;
+    z-index: 1005;
+    width: 25.7vw;
+    margin: 4.5vw 7.8vw;
+}
+
+.comment-input {
+    background-color: #13526f;
+    width: 25.7vw;
+    height: 5vw;
+    margin-bottom: 2.5vw;
+    margin-top: 1.5vw;
+    box-shadow: 0 0 7px rgba(91, 169, 210, 0.8);
+    border-radius: 1px;
+}
+
+.comment-input .comment-title {
+    color: #edf2f8;
+    line-height: 5vw;
+    margin-left: 1.2vw;
+    font-size: 1.1vw;
+    text-align: center;
+    width: 4.4vw;
+}
+
+.comment-input .comment-title small {
+    font-size: 0.7vw;
+    line-height: 1vw;
+    position: absolute;
+    margin-top: 3vw;
+    text-align: center;
+    width: 4.4vw;
+}
+
+.comment-input .comment-split {
+    color: #edf2f8;
+    line-height: 5vw;
+    font-size: 1.1vw;
+}
+
+.comment-input > div {
+    float: left;
+}
+.comment-submit {
+    position: absolute;
+    z-index: 1005;
+    width: 9.9vw;
+    height: 12.2vw;
+    margin: 15.5vw 0 0 34.6vw;
+    background-color: rgba(19, 82, 110, .6);
+    padding: 0 2vw 0 .8vw;
+    border-radius: .2vw;
+}
+
+.comment-submit .sub-title {
+    text-align: center;
+    color: #edf2f8;
+    line-height: 1.5vw;
+    font-size: 1.1vw;
+    margin-top: 2vw;
+}
+
+.comment-input .text-input {
+    padding: .9vw 0 0 1.2vw;
+}
+
+.comment-input .text-input input {
+    width: 17vw;
+    height: 3vw;
+    padding: 0 1vw 0 1vw;
+    font-size: 1.2vw;
+    color: #444444;
+    border: 1px solid #444444;
+    box-shadow: 5px 7px 10px rgba(22, 22, 22, .8);
+    background-color: #f6f6f6;
+    transition: background-color .5s, border .5s;
+}
+
+.comment-input .text-input input:focus {
+    background-color: #ffffff;
+    border: 1px solid #aaaaaa;
+}
+
+/* END user-comment-panel */

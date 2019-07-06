@@ -11,6 +11,18 @@ $(function () {
         rawPlayer.playSound("click");
         rawPlayer.playSound("loading");
     });
+    var commentPanel = $("#commentPanel");
+    $(".commentClose").click(function () {
+        $(commentPanel).removeClass("user-comment-panel-show");
+        $(commentPanel).addClass("user-comment-panel-hide");
+        rawPlayer.playSound("click");
+    });
+    $(".commentOpen").click(function () {
+        $(commentPanel).removeClass("user-comment-panel-hide");
+        $(commentPanel).addClass("user-comment-panel-show");
+        rawPlayer.playSound("click");
+        rawPlayer.playSound("loading");
+    });
     $(".right-btn,.left-btn").mouseenter(function () {
         rawPlayer.playSound("hover3");
     });

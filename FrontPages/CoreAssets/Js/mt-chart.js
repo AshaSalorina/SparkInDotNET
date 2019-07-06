@@ -1,7 +1,11 @@
 /**
  * movie 按类型图表初始化
  */
-(function () {
+var typeChart = (function () {
+    var typeChartObj = {};
+    /**
+     * 初始化配置模板
+     */
     var item = {
         name: '男性平均分',
         type: 'bar',
@@ -19,9 +23,6 @@
         },
         data: [1.6]
     };
-    /**
-     * 初始化配置
-     */
     var generateOption = function () {
         return {
             title: {
@@ -64,68 +65,115 @@
             series: []
         };
     };
-    var templates = document.getElementById('templates');
-    var legendElem = templates.getElementsByClassName('legend-item')[0];
+    var templates = $('#templates');
+    var legendElem = $(templates).find('.legend-item')[0];
     /**
-     * 渲染图表 - sex
+     * 初始化图表对象
      */
-    var mtChartGenderElem = document.getElementById('mtChartGender');
-    var mtChartSexLegend = document.getElementById('mtChartSexLegend');
-    var mtChartGender = echarts.init(mtChartGenderElem);
-    var mtChartGenderOption = generateOption();
-    mtChartGenderOption.yAxis.data = ['按性别'];
-    mtChartGenderOption.legend.data = ['女性', '男性'];
-    mtChartGenderOption.grid.height = '100%';
-    mtChartGenderOption.series = [];
-    mtChartGenderOption.series.push(JSON.parse(JSON.stringify(item)));
-    mtChartGenderOption.series[0].name = '女性';
-    mtChartGenderOption.series[0].itemStyle.color = '#ff87ad';
-    mtChartGenderOption.series[0].data = [3.8];
-    var lenged = legendElem.cloneNode(true);
-    lenged.getElementsByClassName('legend-item-color')[0].style.backgroundColor = '#ff87ad';
-    lenged.getElementsByClassName('legend-item-title')[0].innerHTML = '女性';
-    mtChartSexLegend.appendChild(lenged);
-    mtChartGenderOption.series.push(JSON.parse(JSON.stringify(item)));
-    mtChartGenderOption.series[1].name = '男性';
-    mtChartGenderOption.series[1].itemStyle.color = '#4395c7';
-    mtChartGenderOption.series[1].data = [2.6];
-    lenged = legendElem.cloneNode(true);
-    lenged.getElementsByClassName('legend-item-color')[0].style.backgroundColor = '#4395c7';
-    lenged.getElementsByClassName('legend-item-title')[0].innerHTML = '男性';
-    mtChartSexLegend.appendChild(lenged);
-    mtChartGender.setOption(mtChartGenderOption);
-    /**
-     * 渲染图表 - type
-     */
-    var mtChartTypeElem = document.getElementById('mtChartType');
-    var mtChartTypeLegend = document.getElementById('mtChartTypeLegend');
-    var mtChartType = echarts.init(mtChartTypeElem);
-    var mtChartTypeOption = generateOption();
-    var typeColors = ["#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#ff7c7c", "#9287e7"];
-    var typeNames = ["Adventure", "Animation", "Children", "Comedy", "Fantasy", "Romance"];
-    var typeDatas = [5.0, 4.6, 3.8, 3.6, 2.8, 2.1];
-    mtChartTypeOption.yAxis.data = ['按类型'];
-    mtChartTypeOption.legend.data = ["Adventure", "Animation", "Children", "Comedy", "Fantasy", "Romance"];
-    mtChartTypeOption.grid.height = '100%';
-    mtChartTypeOption.series = [];
-    for (var i = 0; i < typeNames.length; i++) {
-        mtChartTypeOption.series.push(JSON.parse(JSON.stringify(item)));
-        mtChartTypeOption.series[i].name = typeNames[i];
-        mtChartTypeOption.series[i].itemStyle.color = typeColors[i];
-        mtChartTypeOption.series[i].data = [typeDatas[i]];
-        lenged = legendElem.cloneNode(true);
-        lenged.getElementsByClassName('legend-item-color')[0].style.backgroundColor = typeColors[i];
-        lenged.getElementsByClassName('legend-item-title')[0].innerHTML = typeNames[i];
-        mtChartTypeLegend.appendChild(lenged);
-    }
-    mtChartType.setOption(mtChartTypeOption);
+    var mtChart = {
+        "gender": {
+            "elem": echarts.init($('#mtChartGender')[0]),
+            "legend": $('#mtChartSexLegend')
+        },
+        "type": {
+            "elem": echarts.init($('#mtChartType')[0]),
+            "legend": $('#mtChartTypeLegend')
+        }
+    };
 
     /**
-     * window重置分析
+     * 生成节点
+     */
+    function createLenged(name, color) {
+        var lenged = legendElem.cloneNode(true);
+        $(lenged).find('.legend-item-color')[0].style.backgroundColor = color;
+        $(lenged).find('.legend-item-title')[0].innerHTML = name;
+    }
+
+    function generateData(name, color, data) {
+        var config = JSON.parse(JSON.stringify(item));
+        config.name = name;
+        config.itemStyle.color = color;
+        config.data = data;
+        return config;
+    }
+
+    /**
+     * 渲染按性别平均分
+     * @param dataSet
+     */
+    typeChartObj.initGender = function (dataSet) {
+        var mtChartGenderOption = generateOption();
+        // y轴名称
+        mtChartGenderOption.yAxis.data = ['按性别'];
+        // 提示信息名称
+        mtChartGenderOption.legend.data = ['女性', '男性'];
+        // 图表高度
+        mtChartGenderOption.grid.height = '100%';
+
+        mtChartGenderOption.series = [];
+        mtChartGenderOption.series.push(generateData('女性', '#ff87ad', [dataSet.female]));
+        mtChartGenderOption.series.push(generateData('男性', '#4395c7', [dataSet.men]));
+        $(mtChart.gender.legend).append(createLenged('女性', '#ff87ad'));
+        $(mtChart.gender.legend).append(createLenged('男性', '#4395c7'));
+        mtChart.gender.elem.setOption(mtChartGenderOption);
+    };
+    /**
+     * 渲染按类型平均分 - type
+     */
+    typeChartObj.initType = function (dataSet) {
+        var mtChartTypeOption = generateOption();
+        var typeColors = ["#60acfc", "#32d3eb", "#5bc49f", "#feb64d", "#ff7c7c", "#9287e7"];
+        mtChartTypeOption.yAxis.data = ['按类型'];
+        mtChartTypeOption.legend.data = [];
+        mtChartTypeOption.grid.height = '100%';
+        mtChartTypeOption.series = [];
+        for (var i = 0; i < dataSet.length; i++) {
+            mtChartTypeOption.series.push(generateData(dataSet[i].name, typeColors[i], [dataSet[i].rating]));
+            $(mtChart.type.legend).append(createLenged(dataSet[i].name, typeColors[i]));
+            mtChartTypeOption.legend.data.push(dataSet[i].name);
+        }
+        mtChart.type.elem.setOption(mtChartTypeOption);
+    };
+    var testInit = (function () {
+        typeChartObj.initGender({
+            "men": 3.68,
+            "female": 4.22
+        });
+        typeChartObj.initType([
+            {
+                "name": "Adventure",
+                "rating": 5.0
+            },
+            {
+                "name": "Animation",
+                "rating": 4.6
+            },
+            {
+                "name": "Children",
+                "rating": 3.8
+            },
+            {
+                "name": "Comedy",
+                "rating": 3.6
+            },
+            {
+                "name": "Fantasy",
+                "rating": 2.1
+            },
+            {
+                "name": "Romance",
+                "rating": 2.8
+            }
+        ]);
+    })();
+    /**
+     * 刷新窗口大小的时候，重置图表大小
      */
     window.addEventListener("resize", () => {
-        mtChartGender.resize();
-        mtChartType.resize();
-
+        mtChart.gender.elem.resize();
+        mtChart.type.elem.resize();
     });
+    return typeChartObj;
 })();
+

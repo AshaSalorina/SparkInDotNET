@@ -230,10 +230,79 @@ var inputController = (function () {
             radiosMap[rGroup].push(radio);
         }
     };
-    inputControlObj.init = (function () {
+    /**
+     * 获取选择情况
+     */
+    inputControlObj.getRadioSelectList = function () {
+        var radios = $(".radio-group").find(".input-control-btn");
+        var allBtn = radioGetAllBtn(radios);
+        /**
+         * 如果全选，则不返回任何值
+         */
+        if ($(allBtn)[0].hasAttribute("data-selected")) {
+            return [];
+        }
+        var selectList = [];
+        for (var i = 0; i < radios.length; i++) {
+            var elem = $(radios[i]);
+            if ($(elem).hasClass("radio-all")) {
+                continue;
+            }
+            if ($(elem)[0].hasAttribute("data-disable")) {
+                continue;
+            }
+            if ($(elem)[0].hasAttribute("data-selected")) {
+                selectList.push($(elem).attr("data-value"));
+            }
+        }
+        return selectList;
+    };
+    /**
+     * 初始化
+     */
+    inputControlObj.init = function () {
         addClickListener();
         addChangeListener();
         loadRadios();
-    })();
+    };
     return inputControlObj;
 })();
+/**
+ * 封装请求方法
+ */
+var socketController = (function () {
+    var socketControllerObj = {};
+    var user = returnCitySN["cip"];
+    socketControllerObj.connection = null;
+    socketControllerObj.initConnect = function (startCallBack) {
+        socketControllerObj.connection = new signalR.HubConnectionBuilder().withUrl("/sparkMovie").build();
+        socketControllerObj.connection.start().then(function () {
+            startCallBack();
+        }).catch(function (err) {
+            return console.error(err.toString());
+        });
+    };
+    socketControllerObj.invoke = function (method, message) {
+        socketControllerObj.connection.invoke(method, user, message).catch(function (err) {
+            return console.error(err.toString());
+        });
+    };
+    socketControllerObj.on = function (method, callBack) {
+        socketControllerObj.connection.on(method, function (code, info, message) {
+            callBack(message);
+        });
+    };
+    return socketControllerObj;
+})();
+/**
+ *
+ * @param name
+ * @returns {*}
+ * @constructor
+ */
+var getQueryString = function (name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return unescape(r[2]);
+    return null;
+};
