@@ -283,7 +283,7 @@ var socketController = (function () {
         });
     };
     socketControllerObj.invoke = function (method, message) {
-        socketControllerObj.connection.invoke(method, user, message).catch(function (err) {
+        socketControllerObj.connection.invoke(method, user, JSON.stringify(message)).catch(function (err) {
             return console.error(err.toString());
         });
     };
