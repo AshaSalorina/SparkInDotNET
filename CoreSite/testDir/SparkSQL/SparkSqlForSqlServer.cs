@@ -5,11 +5,17 @@ using System.Threading.Tasks;
 using Microsoft.Spark.Sql.Streaming;
 using Microsoft.Spark.Sql;
 using static Microsoft.Spark.Sql.Functions;
+using System.Timers;
 
 namespace CoreSite.testDir.SparkSQL
 {
     public class SparkSqlForSqlServer
     {
+        /// <summary>
+        /// test data frame
+        /// </summary>
+        private static DataFrame tsRSDF;
+
         public static async Task ReadData(SparkSession sparkSession)
         {
             DataFrame df;
@@ -95,11 +101,41 @@ namespace CoreSite.testDir.SparkSQL
         {
             await Task.Run(() =>
             {
-                sparkSession.ReadStream()
-                .Option("", "")
-                .Text("file://testFiles/*")
-                .Show();
+                tsRSDF = sparkSession.ReadStream()
+                .Option("sep", ",")
+                .Option("header", "true")
+                .Schema("userId integer, movieId integer, rating double, timestamp string")
+                .Csv("file:///mnt/e/OneDrive/WorkingSpace/TestDir/ReadStreamTest/input/");
+
+                //文本或者网页->Sql server -> 流读入Sql，运行以下计算后再次推送至临时表
+                tsRSDF
+                    .GroupBy(tsRSDF["movieId"])
+                    .Agg((Sum(tsRSDF["rating"]) / Count(tsRSDF["rating"])).As("rating")
+                        , Count(tsRSDF["rating"]).As("num"))
+                    .WriteStream()
+                    .OutputMode("complete")
+                    .Format("console")
+                    .Start()
+                    .AwaitTermination();
             });
+        }
+
+        public static void StreamingDeal(SparkSession sparkSession)
+        {
+            //Console.WriteLine("In SD");
+            //Console.WriteLine(tsRSDF.IsStreaming());
+            //if (tsRSDF.IsStreaming())
+            //{
+            //    Console.WriteLine("In SSD");
+            //    var output = 0d;
+            //    tsRSDF.CreateOrReplaceTempView("Update");
+            //    sparkSession.Sql("select movieId,sum(rating) from Update group by movieId")
+            //        .WriteStream()
+            //        .OutputMode("complete")
+            //        .Format("console")
+            //        .Start();
+            //}
+            //Console.WriteLine("End SD");
         }
     }
 }
