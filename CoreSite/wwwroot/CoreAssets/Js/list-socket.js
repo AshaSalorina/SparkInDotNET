@@ -29,11 +29,13 @@ var movieSocketSender = (function () {
             "ratingMax": 5.00,
             "searchKeywords": ""
         };
+    } else {
+        senderObj.searchAttr = JSON.parse(senderObj.searchAttr);
     }
 
     senderObj.sendPageRequest = function () {
         var message = {
-            "ratingRage": [senderObj.searchAttr.ratingMin, senderObj.searchAttr.ratingMax],
+            "ratingRage": [parseFloat(senderObj.searchAttr.ratingMin).toFixed(2), parseFloat(senderObj.searchAttr.ratingMax).toFixed(2)],
             "movieType": senderObj.searchAttr.typeSelectList,
             "movieKeyName": senderObj.searchAttr.searchKeywords,
             "pageNo": movieController.pageNo++,
@@ -42,7 +44,6 @@ var movieSocketSender = (function () {
         console.log("==============搜索参数=============");
         console.log(senderObj.searchAttr);
         console.log(message);
-        console.log(senderObj.searchAttr);
         console.log("===================================");
         socketController.invoke("getMovieList", message);
     };
