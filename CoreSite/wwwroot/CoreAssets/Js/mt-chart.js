@@ -89,6 +89,7 @@ var typeChart = (function () {
         console.log(lenged);
         $(lenged).find('.legend-item-color')[0].style.backgroundColor = color;
         $(lenged).find('.legend-item-title')[0].innerHTML = name;
+        return lenged;
     }
 
     function generateData(name, color, data) {

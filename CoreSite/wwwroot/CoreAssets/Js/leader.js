@@ -11,6 +11,9 @@ $(function () {
         rawPlayer.playSound("click");
         rawPlayer.playSound("loading");
     });
+    $(".toIndex").click(function () {
+        window.location.href = "index.html";
+    });
     var commentPanel = $("#commentPanel");
     $(".commentClose").click(function () {
         $(commentPanel).removeClass("user-comment-panel-show");

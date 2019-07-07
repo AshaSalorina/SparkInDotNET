@@ -5,10 +5,10 @@
     /**
      * 初始化映射表
      * */
-    var occupationMap = ["other", "academic/educator", "artist", "clerical/admin", "college/grad student", "customer service"
-        , "doctor/health care", "executive/managerial", "farmer", "homemaker", "K-12 student", "lawyer"
-        , "programmer", "retired", "sales/marketing", "scientist", "self-employed", "technician/engineer"
-        , "tradesman/craftsman", "unemployed", "writer"];
+    var occupationMap = ["other", "academic", "artist", "clerical", "college", "service"
+        , "doctor", "executive", "farmer", "homemaker", "student", "lawyer"
+        , "programmer", "retired", "sales", "scientist", "self-employed", "engineer"
+        , "tradesman", "unemployed", "writer"];
     /**
      * 搜索功能类型列表请求
      */
