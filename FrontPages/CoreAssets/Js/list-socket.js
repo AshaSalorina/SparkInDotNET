@@ -21,24 +21,30 @@ var movieSocketSender = (function () {
      * 初始化请求发送
      */
     var senderObj = {};
-    var searchAttr = sessionStorage.getItem("searchAttr");
-    if (searchAttr === null) {
-        searchAttr = {
+    senderObj.searchAttr = sessionStorage.getItem("searchAttr");
+    if (senderObj.searchAttr === null) {
+        senderObj.searchAttr = {
             "typeSelectList": [],
             "ratingMin": 0.00,
             "ratingMax": 5.00,
             "searchKeywords": ""
         };
+    } else {
+        senderObj.searchAttr = JSON.parse(senderObj.searchAttr);
     }
 
     senderObj.sendPageRequest = function () {
         var message = {
-            "ratingRage": [searchAttr.ratingMin, searchAttr.ratingMax],
-            "movieType": [searchAttr.typeSelectList],
-            "movieKeyName": searchAttr.searchKeywords,
+            "ratingRage": [parseFloat(senderObj.searchAttr.ratingMin).toFixed(2), parseFloat(senderObj.searchAttr.ratingMax).toFixed(2)],
+            "movieType": senderObj.searchAttr.typeSelectList,
+            "movieKeyName": senderObj.searchAttr.searchKeywords,
             "pageNo": movieController.pageNo++,
             "pageSize": 4
         };
+        console.log("==============搜索参数=============");
+        console.log(senderObj.searchAttr);
+        console.log(message);
+        console.log("===================================");
         socketController.invoke("getMovieList", message);
     };
 
@@ -55,6 +61,14 @@ var movieSocketSender = (function () {
     var onMovieList = function (msg) {
         var ratingObj = JSON.parse(msg);
         movieController.loadLock = false;
+        /**
+        * 格式化小数/类型列表
+        * */
+        for (var i = 0; i < ratingObj.movieList.length; i++) {
+            ratingObj.movieList[i].rating = ratingObj.movieList[i].rating.toFixed(2);
+            ratingObj.movieList[i].movieType = ratingObj.movieList[i].movieType.split("|").join("/");
+        }
+ 
         movieController.setFilmData(ratingObj.movieList);
         movieController.loadPage();
     };
