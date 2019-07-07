@@ -45,6 +45,7 @@ var movieSocketSender = (function () {
         console.log(senderObj.searchAttr);
         console.log(message);
         console.log("===================================");
+        movieController.loadLock = true;
         socketController.invoke("getMovieList", message);
     };
 
@@ -68,12 +69,11 @@ var movieSocketSender = (function () {
             ratingObj.movieList[i].rating = ratingObj.movieList[i].rating.toFixed(2);
             ratingObj.movieList[i].movieType = ratingObj.movieList[i].movieType.split("|").join("/");
         }
- 
+
         movieController.setFilmData(ratingObj.movieList);
         movieController.loadPage();
     };
     senderObj.pageRequestSend = function () {
-        movieController.loadLock = true;
         senderObj.sendPageRequest();
     };
     /**

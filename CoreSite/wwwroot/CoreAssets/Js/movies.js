@@ -39,6 +39,9 @@ var movieController = (function () {
      */
     var movieScrollListenerInit = function () {
         $("#moviesList").scroll(function () {
+            if (movieControllerObj.loadLock) {
+                return false;
+            }
             var moviesList = $("#moviesList");
             var mContainer = $(".movies-container");
             var mItem = $(".movie-item")[0];
@@ -64,9 +67,6 @@ var movieController = (function () {
      * 动态加载一页元素
      */
     movieControllerObj.loadPage = function () {
-        if (movieControllerObj.loadLock) {
-            return false;
-        }
         /*加异步锁*/
         movieController.loadLock = true;
         var mContainer = $(".movies-container");

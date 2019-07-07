@@ -12,7 +12,7 @@ $(function () {
         rawPlayer.playSound("loading");
     });
     $(".toIndex").click(function () {
-        window.location.href = "index.html";
+        window.location.href = "/";
     });
     var commentPanel = $("#commentPanel");
     $(".commentClose").click(function () {

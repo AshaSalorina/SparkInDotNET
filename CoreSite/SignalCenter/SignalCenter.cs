@@ -283,7 +283,7 @@ namespace CoreSite.SignalCenter
 
             //create temp view
             //筛选出了分数和名字
-            Modles.SparkData.Spark.Sql($"select global_temp.movies.movieId,title,genres,rating from global_temp.movies,global_temp.MoviesRatings where rating >= {message.ratingRage[0]} and rating <= {message.ratingRage[1]} and title like '%{message.movieKeyName}%' and global_temp.movies.movieId = global_temp.MoviesRatings.movieId").CreateTempView("TempMovieList");
+            Modles.SparkData.Spark.Sql($"select global_temp.movies.movieId,title,genres,rating from global_temp.movies,global_temp.MoviesRatings where rating >= {message.ratingRage[0]} and rating <= {message.ratingRage[1]} and title like '%{message.movieKeyName}%' and global_temp.movies.movieId = global_temp.MoviesRatings.movieId").CreateOrReplaceTempView("TempMovieList");
 
             var _Movies = Modles.SparkData.Spark.Table("TempMovieList").Collect().ToDictionary(v1 => v1.Get(0).ToString());
 
@@ -426,65 +426,79 @@ namespace CoreSite.SignalCenter
         /// <returns></returns>
         public async Task GetMovieDetail(string user, string invokeMessage)
         {
-            Console.WriteLine("Log:In GetAllAvgRatings :" + invokeMessage);
-
-            var message = JsonConvert.DeserializeObject<RequestMessage>(invokeMessage);
-            //获取目标影片
-            var movieInfo = Modles.SparkData.Movies.Select().Where(Modles.SparkData.Movies["movieId"] == message.movieId).Collect().FirstOrDefault();
-
-            var remsg = new ReMessage_getMovieDetail()
+            try
             {
-                movieId = movieInfo[0].ToString(),
-                movieName = movieInfo[1].ToString(),
-                movieType = movieInfo[2].ToString(),
-                rating = Modles.SparkData.MoviesRating[message.movieId].Ratings,
-                ratingNum = Modles.SparkData.MoviesRating[message.movieId].Numb,
-                userTags = new ReMessage_getMovieDetail.UserTag[1]
+                Console.WriteLine("Log:In GetMovieDetail :" + invokeMessage);
+                //Console.WriteLine("Log:In GetMovieDetail Schema:" + Modles.SparkData.Movies.Schema()));
+                var message = JsonConvert.DeserializeObject<RequestMessage>(invokeMessage);
+                var _tempDF = Modles.SparkData.Movies.Where(Modles.SparkData.Movies["movieId"] == message.movieId.ToString());
+                Console.WriteLine("Log:In GetMovieDetail_tempDF_size : " + _tempDF.Count());
+                //获取目标影片
+                var movieList = _tempDF.Collect().ToList();
+                Console.WriteLine("Log:In GetMovieDetail_movieInfo : " + movieList.Count());
+                var movieInfo = movieList[0];
+                Console.WriteLine("Log:In GetMovieDetail_movieInfo : " + movieInfo.Values);
+                var remsg = new ReMessage_getMovieDetail()
                 {
+                    movieId = movieInfo[0].ToString(),
+                    movieName = movieInfo[1].ToString(),
+                    movieType = movieInfo[2].ToString(),
+                    rating = Modles.SparkData.MoviesRating[message.movieId].Ratings,
+                    ratingNum = Modles.SparkData.MoviesRating[message.movieId].Numb,
+                    userTags = new ReMessage_getMovieDetail.UserTag[1]
+                    {
                     new ReMessage_getMovieDetail.UserTag()
                     {
                         content = "tag1",
-                        name = "testUser"
+                        name = (new Random().Next(100)+1).ToString()
                     }
-                },
-                userRatingDetails = new ReMessage_getMovieDetail.UserRatingDetail[10],
-                ratings = new ReMessage_getMovieDetail.Rating[20]
-            };
-
-            //装载用户评分
-            var _tempDetails = Modles.SparkData.Spark.Sql($"select userId,rating,from_unixtime(timestamp, 'yyyy-MM-dd HH:mm') from global_temp.ratings,global_temp.users where movieId = {message.movieId} order by timestamp desc").Take(10).ToList();
-            var _flag = 0;
-            foreach (var item in _tempDetails)
-            {
-                remsg.userRatingDetails[_flag++] = new ReMessage_getMovieDetail.UserRatingDetail()
-                {
-                    name = item[0].ToString(),
-                    rating = double.Parse(item[1].ToString()),
-                    date = item[2].ToString()
+                    },
+                    userRatingDetails = new ReMessage_getMovieDetail.UserRatingDetail[10],
+                    ratings = new ReMessage_getMovieDetail.Rating[20]
                 };
-            }
 
-            //装载时间区域
-            var _tempTimeRatings = Modles.SparkData.Spark.Sql($"select from_unixtime(timestamp, 'yyyy-MM-dd') as stamp ,Avg(rating) from global_temp.ratings where movieId = {message.movieId} group by from_unixtime(timestamp, 'yyyy-MM-dd') order by stamp desc").Take(20).ToList();
-            _flag = 0;
-            foreach (var item in _tempTimeRatings)
-            {
-                remsg.ratings[_flag++] = new ReMessage_getMovieDetail.Rating()
+                //装载用户评分
+                var _tempDetails = Modles.SparkData.Spark.Sql($"select global_temp.users.userId,rating,from_unixtime(timestamp, 'yyyy-MM-dd HH:mm') from global_temp.ratings,global_temp.users where movieId = {message.movieId} and global_temp.ratings.userId = global_temp.users.userId order by timestamp desc").Take(10).ToList();
+                var _flag = 0;
+                foreach (var item in _tempDetails)
                 {
-                    rating = double.Parse(item[1].ToString()),
-                    date = item[0].ToString()
-                };
-            }
+                    remsg.userRatingDetails[_flag++] = new ReMessage_getMovieDetail.UserRatingDetail()
+                    {
+                        name = item[0].ToString(),
+                        rating = double.Parse(item[1].ToString()),
+                        date = item[2].ToString()
+                    };
+                }
 
-            await Clients.Caller.SendAsync("GetMovieDetail", "200", "成功", JsonConvert.SerializeObject(remsg));
-            //用字典管理更新连接池
-            if (UserWithMID.ContainsKey(Clients.Caller))
-            {
-                UserWithMID[Clients.Caller] = message.movieId;
+                //装载时间区域
+                var _tempTimeRatings = Modles.SparkData.Spark.Sql($"select from_unixtime(timestamp, 'yyyy-MM-dd') as stamp ,Avg(rating) from global_temp.ratings where movieId = {message.movieId} group by from_unixtime(timestamp, 'yyyy-MM-dd') order by stamp desc").Take(20).ToList();
+                _flag = 0;
+                foreach (var item in _tempTimeRatings)
+                {
+                    remsg.ratings[_flag++] = new ReMessage_getMovieDetail.Rating()
+                    {
+                        rating = double.Parse(item[1].ToString()),
+                        date = item[0].ToString()
+                    };
+                }
+                var output = JsonConvert.SerializeObject(remsg);
+                Console.WriteLine("Log:Call GetMovieDetail:" + output);
+                await Clients.Caller.SendAsync("GetMovieDetail", "200", "成功", output);
+                //用字典管理更新连接池
+                if (UserWithMID.ContainsKey(Clients.Caller))
+                {
+                    UserWithMID[Clients.Caller] = message.movieId;
+                }
+                else
+                {
+                    UserWithMID.Add(Clients.Caller, message.movieId);
+                }
             }
-            else
+            catch (Exception e)
             {
-                UserWithMID.Add(Clients.Caller, message.movieId);
+                await Clients.Caller.SendAsync("GetMovieDetail", "400", "失败");
+
+                Console.WriteLine("Log:Error:" + e.Message);
             }
         }
 
@@ -548,7 +562,7 @@ namespace CoreSite.SignalCenter
                     };
 
                     //装载用户评分
-                    var _tempDetails = Modles.SparkData.Spark.Sql($"select userId,rating,from_unixtime(timestamp, 'yyyy-MM-dd HH:mm') from global_temp.ratings,global_temp.users where movieId = {message.movieId} order by timestamp desc").Take(10).ToList();
+                    var _tempDetails = Modles.SparkData.Spark.Sql($"select global_temp.users.userId,rating,from_unixtime(timestamp, 'yyyy-MM-dd HH:mm') from global_temp.ratings,global_temp.users where movieId = {message.movieId} order by timestamp desc").Take(10).ToList();
                     var _flag = 0;
                     foreach (var item2 in _tempDetails)
                     {
@@ -585,13 +599,42 @@ namespace CoreSite.SignalCenter
         /// <param name="user"></param>
         /// <param name="message"></param>
         /// <returns></returns>
-        public async Task AddUserComment(string user, RequestMessage message)
+        public async Task AddUserComment(string user, string invokeMessage)
         {
+            var message = JsonConvert.DeserializeObject<RequestMessage>(invokeMessage);
+            Console.WriteLine("Log:In AddUserComment:" + message);
             //Modles.SparkData.Ratings.A(1, message.rating.ToString(), message.tag);
-
+            var remsg = new ReMessage_updateRating()
+            {
+                ratings = new ReMessage_updateRating.Rating[1]
+                {
+                    new ReMessage_updateRating.Rating() {
+                        rating = message.rating,
+                        date = "2019-07-07"//DateTime.Now.ToString()
+                    }
+                },
+                userRatingDetails = new ReMessage_updateRating.UserRatingDetail[1]
+                {
+                    new ReMessage_updateRating.UserRatingDetail()
+                    {
+                        date = "2019-07-07",
+                        name = message.name,
+                        rating = message.rating
+                    }
+                },
+                userTags = new ReMessage_updateRating.UserTag[1]
+                {
+                    new ReMessage_updateRating.UserTag()
+                    {
+                        content = message.tag,
+                        name = message.name
+                    }
+                }
+            };
             //Modles.SparkData.Ratings.Na().Fill(0);
 
             await Clients.Caller.SendAsync("AddUserComment", "200", "成功");
+            await Clients.Caller.SendAsync("updateRating", "200", "成功", JsonConvert.SerializeObject(remsg));
         }
 
         public override Task OnDisconnectedAsync(Exception exception)
