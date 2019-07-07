@@ -86,6 +86,7 @@ var typeChart = (function () {
      */
     function createLenged(name, color) {
         var lenged = legendElem.cloneNode(true);
+        console.log(lenged);
         $(lenged).find('.legend-item-color')[0].style.backgroundColor = color;
         $(lenged).find('.legend-item-title')[0].innerHTML = name;
     }
@@ -128,45 +129,18 @@ var typeChart = (function () {
         mtChartTypeOption.legend.data = [];
         mtChartTypeOption.grid.height = '100%';
         mtChartTypeOption.series = [];
+
+        console.log("================创建图表标识对象==================");
         for (var i = 0; i < dataSet.length; i++) {
             mtChartTypeOption.series.push(generateData(dataSet[i].name, typeColors[i], [dataSet[i].rating]));
+            console.log("name:" +dataSet[i].name + " color:" + typeColors[i]+" obj:");
+            console.log(createLenged(dataSet[i].name, typeColors[i]));
             $(mtChart.type.legend).append(createLenged(dataSet[i].name, typeColors[i]));
             mtChartTypeOption.legend.data.push(dataSet[i].name);
         }
+        console.log("===================创建完成==================");
         mtChart.type.elem.setOption(mtChartTypeOption);
     };
-    var testInit = (function () {
-        typeChartObj.initGender({
-            "men": 3.68,
-            "female": 4.22
-        });
-        typeChartObj.initType([
-            {
-                "name": "Adventure",
-                "rating": 5.0
-            },
-            {
-                "name": "Animation",
-                "rating": 4.6
-            },
-            {
-                "name": "Children",
-                "rating": 3.8
-            },
-            {
-                "name": "Comedy",
-                "rating": 3.6
-            },
-            {
-                "name": "Fantasy",
-                "rating": 2.1
-            },
-            {
-                "name": "Romance",
-                "rating": 2.8
-            }
-        ]);
-    })();
     /**
      * 刷新窗口大小的时候，重置图表大小
      */

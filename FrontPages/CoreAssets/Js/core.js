@@ -289,6 +289,11 @@ var socketController = (function () {
     };
     socketControllerObj.on = function (method, callBack) {
         socketControllerObj.connection.on(method, function (code, info, message) {
+            console.log("===========请求返回数据===============");
+            console.log("状态:"+code);
+            console.log("信息:" + info);
+            console.log(message);
+            console.log("================END====================");
             callBack(message);
         });
     };

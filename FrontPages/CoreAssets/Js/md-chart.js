@@ -129,44 +129,6 @@ var dailyChart = (function () {
         mdAreaOption.series[0].name = '地区平均分';
         mdChart.area.elem.setOption(mdAreaOption);
     };
-    var init = (function () {
-        dailyChartObj.initOccupation([
-            {
-                "name": "Doctor",
-                "rating": 3.25
-            }, {
-                "name": "Computer",
-                "rating": 2.25
-            }, {
-                "name": "Science",
-                "rating": 1.36
-            }, {
-                "name": "Cosmos",
-                "rating": 3.33
-            }, {
-                "name": "Dentist",
-                "rating": 4.55
-            }
-        ]);
-        dailyChartObj.initArea([
-            {
-                "name": "ChengDu",
-                "rating": 4.3
-            }, {
-                "name": "BeiJing",
-                "rating": 3.66
-            }, {
-                "name": "ShangHai",
-                "rating": 4.12
-            }, {
-                "name": "ShenZhen",
-                "rating": 3.21
-            }, {
-                "name": "HaiNan",
-                "rating": 2.55
-            }
-        ]);
-    })();
     /**
      * window重置分析
      */
