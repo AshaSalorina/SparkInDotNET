@@ -3,6 +3,10 @@
  */
 (function () {
     /**
+     * 初始化映射列表
+     * */
+    var nameMap = ["Ulrica", "Louise", "Ishtar", "Clover", "An", "Anemone", "Amaya", "Michelle", "Angelina", "Sicily", "Celina", "Jo", "De", "Muse", "Bebe", "Gina", "Demi", "Kimi", "Desdemona", "Esme", "Desdemona", "Claudia", "Deirdre", "Indira", "Cecilia", "Delilah", "Kira", "Sakura", "Luna", "Claudia", "Muriel", "Amaya", "Cassiopeia", "Karida", "Cytheria", "Dione", "Amaryllis", "Cyan", "Michaela", "Skye", "Delores", "Cecile", "Amaris", "Snow", "Blanche", "Kimi", "Ariel", "Ah-lam", "Laraine", "Elina", "Ice", "An", "Kira", "Aida", "Mimi", "Queenie", "Miya", "Angel", "Sandy", "Juno", "Fiona", "Muriel", "Dione", "Aletta", "Chloe", "Serafina", "Cosima", "Lilith", "Amethyst", "airica", "Dolores", "Geri", "Danae", "Elodie", "Michelle", "Quella", "Frederica", "Cassiel", "Ash", "Derica", "Sera", "Sade", "Lorelei", "Gabrielle", "Karida", "Easter", "Nana", "Arella", "Melantha", "Kyrene", "Regina", "Izefia", "Felicia", "Ciel"];
+    /**
      * 搜索功能类型列表请求
      */
     var initSearchTypeList = function () {
@@ -38,8 +42,12 @@
         /**
           * 格式化小数
           * */
+        for (var i = 0; i < movieObj.userTags.length; i++) {
+            movieObj.userTags[i].name = nameMap[parseInt(movieObj.userTags[i].name)%94];
+        }
         for (var i = 0; i < movieObj.userRatingDetails.length; i++) {
             movieObj.userRatingDetails[i].rating = movieObj.userRatingDetails[i].rating.toFixed(2);
+            movieObj.userRatingDetails[i].name = nameMap[parseInt(movieObj.userRatingDetails[i].name) % 94];
         }
         for (var i = 0; i < movieObj.ratings.length; i++) {
             movieObj.ratings[i].rating = movieObj.ratings[i].rating.toFixed(2);

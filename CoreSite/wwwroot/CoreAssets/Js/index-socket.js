@@ -3,6 +3,13 @@
  */
 (function () {
     /**
+     * 初始化映射表
+     * */
+    var occupationMap = ["other", "academic/educator", "artist", "clerical/admin", "college/grad student", "customer service"
+        , "doctor/health care", "executive/managerial", "farmer", "homemaker", "K-12 student", "lawyer"
+        , "programmer", "retired", "sales/marketing", "scientist", "self-employed", "technician/engineer"
+        , "tradesman/craftsman", "unemployed", "writer"];
+    /**
      * 搜索功能类型列表请求
      */
     var initSearchTypeList = function () {
@@ -40,17 +47,19 @@
         var occupationRatings = ratingObj.ratings.occupation;
         var areaRatings = ratingObj.ratings.area;
         /**
-         * 格式化小数
+         * 格式化数据
          * */
         for (var i = 0; i < typeRatings.length; i++) {
             typeRatings[i].rating = typeRatings[i].rating.toFixed(2);
         }
         for (var i = 0; i < occupationRatings.length; i++) {
             occupationRatings[i].rating = occupationRatings[i].rating.toFixed(2);
+            occupationRatings[i].name = occupationMap[parseInt(occupationRatings[i].name)];
         }
         for (var i = 0; i < areaRatings.length; i++) {
             areaRatings[i].rating = areaRatings[i].rating.toFixed(2);
         }
+    
         /**
          * 初始化全部图表
          */
