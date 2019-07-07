@@ -136,20 +136,26 @@ namespace CoreSite.SparkSql
                 foreach (var item2 in item[2].ToString().Split('|'))
                 {
                     //if have key item2 add this movie to dic
-                    if (tyR.ContainsKey(item2))
+                    if (!tyR.ContainsKey(item2))
                     {
-                        tyR[item2].Add(int.Parse(item[0].ToString()));
+                        tyR.Add(item2, new List<int>());
                     }
+
+                    tyR[item2].Add(int.Parse(item[0].ToString()));
                 }
             }
+            Console.WriteLine(tyR.Count);
             //reduce
             foreach (var item in tyR)
             {
                 var sum = 0d;
                 //avg for each type ratingas
-                foreach (var item2 in item.Value)
+                foreach (var movieId in item.Value)
                 {
-                    sum += Modles.SparkData.MoviesRating[item2].Ratings;
+                    if (Modles.SparkData.MoviesRating.ContainsKey(movieId))
+                    {
+                        sum += Modles.SparkData.MoviesRating[movieId].Ratings;
+                    }
                 }
                 sum /= item.Value.Count;
                 //into dic
@@ -161,6 +167,7 @@ namespace CoreSite.SparkSql
                 {
                     Modles.SparkData.TypeRating.Add(item.Key, sum);
                 }
+                //Console.WriteLine("Test:" + item.Key);
             }
         }
     }

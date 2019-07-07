@@ -30,6 +30,8 @@ namespace CoreSite
 
             _ = SparkSql.SparkSqlForSqlServer.UpdateDataFromDB();
 
+            Console.WriteLine("Log:Web open now");
+
             CreateWebHostBuilder(args).Build().Run();
         }
 

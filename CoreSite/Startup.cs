@@ -44,7 +44,7 @@ namespace CoreSite
                 routes.MapHub<SignalCenter.SignalCenter>("/sparkMovie");
             });
 
-            app.UseDefaultFiles("/index.html");
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             //始终最后声明
